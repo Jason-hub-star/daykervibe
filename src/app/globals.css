@@ -1,1 +1,42 @@
 @import "tailwindcss";
+
+/* ----- Custom Fonts ----- */
+@font-face {
+  font-family: "Press Start 2P";
+  src: url("/fonts/press-start-2p/PressStart2P.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DungGeunMo";
+  src: url("/fonts/DungGeunMo/DungGeunMo.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ----- 8-bit Design Tokens (Tailwind v4 @theme) ----- */
+@theme {
+  /* Colors — from wireframe.md 2.1 */
+  --color-dark-bg: #171314;
+  --color-dark-border: #1A1A1A;
+  --color-card-white: #F7F1E8;
+  --color-accent-orange: #F08A24;
+  --color-accent-yellow: #F7D64A;
+  --color-accent-mint: #98F0E1;
+  --color-accent-pink: #FF79C9;
+  --color-accent-purple: #A98DF8;
+
+  /* Font families */
+  --font-pixel: "Press Start 2P", monospace;
+  --font-dunggeunmo: "DungGeunMo", sans-serif;
+}
+
+/* ----- Base Styles ----- */
+body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-card-white);
+  font-family: var(--font-dunggeunmo);
+}
