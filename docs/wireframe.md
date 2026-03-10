@@ -29,15 +29,18 @@
 Last Updated: 2026-03-09 (KST)
 
 ## Design References
-| 페이지 | 레퍼런스 파일 |
-|--------|-------------|
-| `/` 랜딩 | `public/design_reference/landing_page.png` |
-| `/hackathons` 목록 | `public/design_reference/hackathon_listing.png` |
-| `/hackathons/:slug` 상세 | `public/design_reference/hackathon_detail.png` |
-| `/camp` 원정대 모집 | `public/design_reference/camp_recruitment.png` |
-| `/rankings` 랭킹 | `public/design_reference/rankings.png` |
-| `/war-room/:teamId` 작전실 | `public/design_reference/war_room.png` |
-| 공통 컴포넌트 스타일 | `public/design_reference/1.png` |
+> ~~원본 `public/design_reference/*.png` 파일은 Phase 2 에셋 정리 시 삭제됨 (2026-03-10).~~
+> 각 페이지 구현은 아래 Wireframe 명세와 코드 기준으로 유지.
+
+| 페이지 | 구현 파일 |
+|--------|-----------|
+| `/` 랜딩 | `src/app/page.tsx` |
+| `/hackathons` 목록 | `src/app/hackathons/page.tsx` |
+| `/hackathons/:slug` 상세 | `src/app/hackathons/[slug]/page.tsx` |
+| `/camp` 원정대 모집 | `src/app/camp/page.tsx` |
+| `/rankings` 랭킹 | `src/app/rankings/page.tsx` |
+| `/war-room/:teamId` 작전실 | `src/app/war-room/[teamId]/page.tsx` |
+| 공통 컴포넌트 | `src/components/ui/*`, `src/components/layout/*` |
 
 ## 1. 디자인 방향
 - 8비트 게이머 감성

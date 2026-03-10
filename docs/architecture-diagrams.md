@@ -203,11 +203,11 @@ graph TD
 ---
 
 ## 8. Missing-Check Nodes
-- [ ] 상단바 이동
-- [ ] 상태 UI 3종
-- [ ] 상세 섹션 8개
-- [ ] 베이스캠프 요약
-- [ ] 작전실 워크플로우 보드
-- [ ] 제출 상태
-- [ ] `미제출`
-- [ ] GitHub + Vercel 연결
+- [x] 상단바 이동 — `TopNav.tsx` (HOME/HACKATHONS/CAMP/RANKINGS)
+- [x] 상태 UI 3종 — `LoadingState`, `EmptyState`, `ErrorState`
+- [x] 상세 섹션 8개 — `getHackathonSectionsWithFallback()` 보장
+- [x] 베이스캠프 요약 — `/war-room/:teamId` 상단 BASECAMP 카드
+- [x] 작전실 워크플로우 보드 — 4컬럼 drag-and-drop + 모바일 이동 버튼
+- [x] 제출 상태 — `submissionStage` 5단계 스테퍼
+- [x] `미제출` — LeaderboardSection `status === 'not_submitted'` 처리
+- [ ] GitHub + Vercel 연결 — 배포 준비 중

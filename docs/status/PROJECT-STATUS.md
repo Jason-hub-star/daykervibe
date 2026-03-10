@@ -1,5 +1,23 @@
 # Project Status
 
+## 2026-03-10 Addendum - SSOT Compliance Review & Documentation Drift Fix
+
+- 전수 SSOT 리뷰 수행: PRD, Wireframe, Schema, Handover, Architecture 대비 구현 정합성 검증
+- SSOT 정합성 점수: **92/100** — 구현은 전수 완료, 문서 드리프트 2건 수정
+- 수정 항목:
+  1. **wireframe.md Design References 테이블** — 삭제된 `public/design_reference/*.png` 참조를 실제 구현 파일 경로로 교체
+  2. **architecture-diagrams.md Missing-Check Nodes** — 구현 완료된 7개 항목을 `[x]`로 업데이트, 각 구현 위치 주석 추가
+- 구현 검증 결과 (전수 정상):
+  - War Room 7개 구성요소 완비 (베이스캠프/제출단계/워크플로우/체크리스트/메모/링크/팀원)
+  - SummaryBar 5항목 정합 (상태/기간/팀수/조회수/총상금)
+  - Home 6개 섹션 정합 (Hero/Featured/Value/Rankings/운영품질/Footer CTA)
+  - Privacy 경계 정상 (ownerLabel/isPrivateProfile 비노출)
+  - ended 가드, contactUrl 검증, 미제출 표기 정상
+  - Camp 수정/모집마감 기능 정상
+- Validation:
+  - 문서 정합성 검증 완료
+  - 코드 변경 없음 (문서만 수정)
+
 ## 2026-03-10 Addendum - UI Polish: Dark Card, Filter, Typography
 
 - Camp 페이지 필터 UI 개선:
