@@ -39,3 +39,17 @@
   1. Add war-room entry CTA in `/camp`
   2. Add war-room deep links in the hackathon detail teams section
   3. Reword status docs around discoverability and remaining SSOT gaps
+
+## Phase 1 - Camp War Room Entry
+- Scope:
+  - Add `작전실 열기` CTA to each `/camp` team card
+  - Keep the public contact link available alongside the internal CTA
+- Why:
+  - The recruitment board is one of the primary user entry points, but it had no direct path into `/war-room/:teamId`.
+  - This closes the most obvious discoverability gap without changing privacy boundaries.
+- Validation:
+  - Team cards now expose a direct internal link to `/war-room/:teamId`
+  - Existing external contact links remain visible
+- Next:
+  1. Add war-room deep links in the hackathon detail teams section
+  2. Reword status docs around discoverability and remaining SSOT gaps

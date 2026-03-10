@@ -15,8 +15,6 @@ export default function CampPage() {
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
   const [filter, setFilter] = useState<string>('all');
   const [showForm, setShowForm] = useState(false);
-
-  // Form state
   const [formName, setFormName] = useState('');
   const [formIntro, setFormIntro] = useState('');
   const [formHackathon, setFormHackathon] = useState('');
@@ -28,10 +26,12 @@ export default function CampPage() {
 
     queueMicrotask(() => {
       if (cancelled) return;
-      const t = getItem<Team[]>(STORAGE_KEYS.TEAMS);
-      const h = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
-      setTeams(t ?? []);
-      setHackathons(h ?? []);
+
+      const storedTeams = getItem<Team[]>(STORAGE_KEYS.TEAMS);
+      const storedHackathons = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
+
+      setTeams(storedTeams ?? []);
+      setHackathons(storedHackathons ?? []);
     });
 
     return () => {
@@ -41,31 +41,33 @@ export default function CampPage() {
 
   if (teams === null) return <LoadingState />;
 
-  const filtered = filter === 'all'
-    ? teams
-    : teams.filter(t => t.hackathonSlug === filter);
-
-  const openTeams = filtered.filter(t => t.isOpen);
-  const closedTeams = filtered.filter(t => !t.isOpen);
+  const filteredTeams =
+    filter === 'all' ? teams : teams.filter(team => team.hackathonSlug === filter);
+  const openTeams = filteredTeams.filter(team => team.isOpen);
+  const closedTeams = filteredTeams.filter(team => !team.isOpen);
 
   function handleCreate() {
-    if (!formName.trim() || !teams) return;
+    if (!formName.trim()) return;
 
+    const currentTeams = teams ?? [];
     const newTeam: Team = {
       id: `T-${Date.now()}`,
       hackathonSlug: formHackathon || undefined,
       name: formName.trim(),
       intro: formIntro.trim(),
       isOpen: true,
-      lookingFor: formLookingFor.split(',').map(s => s.trim()).filter(Boolean),
+      lookingFor: formLookingFor
+        .split(',')
+        .map(role => role.trim())
+        .filter(Boolean),
       contactUrl: formContact.trim(),
       memberCount: 1,
       createdAt: new Date().toISOString(),
     };
 
-    const updated = [...teams, newTeam];
-    setTeams(updated);
-    setItem(STORAGE_KEYS.TEAMS, updated);
+    const updatedTeams = [...currentTeams, newTeam];
+    setTeams(updatedTeams);
+    setItem(STORAGE_KEYS.TEAMS, updatedTeams);
 
     setFormName('');
     setFormIntro('');
@@ -77,12 +79,11 @@ export default function CampPage() {
 
   return (
     <PageShell>
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <h1 className="font-pixel text-accent-orange text-lg mb-2">RECRUIT HUB</h1>
+          <h1 className="mb-2 font-pixel text-lg text-accent-orange">RECRUIT HUB</h1>
           <p className="font-dunggeunmo text-card-white/70">
-            원정대를 찾거나, 새로운 원정대를 만드세요
+            원정대를 찾거나 새 원정대를 만들어보세요
           </p>
         </div>
         <PixelButton onClick={() => setShowForm(!showForm)}>
@@ -90,58 +91,71 @@ export default function CampPage() {
         </PixelButton>
       </div>
 
-      {/* Create Form */}
       {showForm && (
         <Card hover={false} className="mb-6">
-          <h2 className="font-pixel text-[10px] text-accent-yellow mb-4">NEW EXPEDITION</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+          <h2 className="mb-4 font-pixel text-[10px] text-accent-yellow">
+            NEW EXPEDITION
+          </h2>
+          <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
-              <label className="font-dunggeunmo text-xs text-dark-bg/70 block mb-1">원정대명 *</label>
+              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+                원정대명 *
+              </label>
               <input
                 value={formName}
-                onChange={e => setFormName(e.target.value)}
-                className="w-full px-3 py-2 bg-dark-bg/5 border-2 border-dark-border text-dark-bg font-dunggeunmo text-sm"
+                onChange={event => setFormName(event.target.value)}
+                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
                 placeholder="예: Team Alpha"
               />
             </div>
             <div>
-              <label className="font-dunggeunmo text-xs text-dark-bg/70 block mb-1">연결 해커톤</label>
+              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+                연결 해커톤
+              </label>
               <select
                 value={formHackathon}
-                onChange={e => setFormHackathon(e.target.value)}
-                className="w-full px-3 py-2 bg-dark-bg/5 border-2 border-dark-border text-dark-bg font-dunggeunmo text-sm"
+                onChange={event => setFormHackathon(event.target.value)}
+                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
               >
-                <option value="">선택 안 함</option>
-                {hackathons.map(h => (
-                  <option key={h.slug} value={h.slug}>{h.title}</option>
+                <option value="">선택 없음</option>
+                {hackathons.map(hackathon => (
+                  <option key={hackathon.slug} value={hackathon.slug}>
+                    {hackathon.title}
+                  </option>
                 ))}
               </select>
             </div>
             <div className="sm:col-span-2">
-              <label className="font-dunggeunmo text-xs text-dark-bg/70 block mb-1">소개</label>
+              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+                소개
+              </label>
               <textarea
                 value={formIntro}
-                onChange={e => setFormIntro(e.target.value)}
-                className="w-full px-3 py-2 bg-dark-bg/5 border-2 border-dark-border text-dark-bg font-dunggeunmo text-sm"
+                onChange={event => setFormIntro(event.target.value)}
+                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
                 rows={2}
-                placeholder="팀 소개를 작성하세요"
+                placeholder="팀 소개를 적어주세요"
               />
             </div>
             <div>
-              <label className="font-dunggeunmo text-xs text-dark-bg/70 block mb-1">모집 포지션 (콤마 구분)</label>
+              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+                모집 포지션 (콤마 구분)
+              </label>
               <input
                 value={formLookingFor}
-                onChange={e => setFormLookingFor(e.target.value)}
-                className="w-full px-3 py-2 bg-dark-bg/5 border-2 border-dark-border text-dark-bg font-dunggeunmo text-sm"
+                onChange={event => setFormLookingFor(event.target.value)}
+                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
                 placeholder="예: Frontend, Designer"
               />
             </div>
             <div>
-              <label className="font-dunggeunmo text-xs text-dark-bg/70 block mb-1">연락 링크</label>
+              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+                연락 링크
+              </label>
               <input
                 value={formContact}
-                onChange={e => setFormContact(e.target.value)}
-                className="w-full px-3 py-2 bg-dark-bg/5 border-2 border-dark-border text-dark-bg font-dunggeunmo text-sm"
+                onChange={event => setFormContact(event.target.value)}
+                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
                 placeholder="https://..."
               />
             </div>
@@ -150,45 +164,47 @@ export default function CampPage() {
         </Card>
       )}
 
-      {/* Filter */}
-      <div className="flex gap-2 mb-6 overflow-x-auto">
+      <div className="mb-6 flex gap-2 overflow-x-auto">
         <button
           onClick={() => setFilter('all')}
-          className={`font-pixel text-[10px] px-3 py-1.5 whitespace-nowrap border-2 transition-colors ${
+          className={`whitespace-nowrap border-2 px-3 py-1.5 font-pixel text-[10px] transition-colors ${
             filter === 'all'
-              ? 'bg-accent-orange text-dark-bg border-accent-orange'
-              : 'bg-transparent text-card-white/70 border-dark-border hover:border-card-white/50'
+              ? 'border-accent-orange bg-accent-orange text-dark-bg'
+              : 'border-dark-border bg-transparent text-card-white/70 hover:border-card-white/50'
           }`}
         >
           전체
         </button>
-        {hackathons.map(h => (
+        {hackathons.map(hackathon => (
           <button
-            key={h.slug}
-            onClick={() => setFilter(h.slug)}
-            className={`font-pixel text-[10px] px-3 py-1.5 whitespace-nowrap border-2 transition-colors ${
-              filter === h.slug
-                ? 'bg-accent-orange text-dark-bg border-accent-orange'
-                : 'bg-transparent text-card-white/70 border-dark-border hover:border-card-white/50'
+            key={hackathon.slug}
+            onClick={() => setFilter(hackathon.slug)}
+            className={`whitespace-nowrap border-2 px-3 py-1.5 font-pixel text-[10px] transition-colors ${
+              filter === hackathon.slug
+                ? 'border-accent-orange bg-accent-orange text-dark-bg'
+                : 'border-dark-border bg-transparent text-card-white/70 hover:border-card-white/50'
             }`}
           >
-            {h.title.length > 15 ? h.title.slice(0, 15) + '…' : h.title}
+            {hackathon.title.length > 15
+              ? `${hackathon.title.slice(0, 15)}...`
+              : hackathon.title}
           </button>
         ))}
-        <span className="ml-auto font-dunggeunmo text-xs text-card-white/50 self-center">
-          {filtered.length}개 원정대
+        <span className="ml-auto self-center font-dunggeunmo text-xs text-card-white/50">
+          {filteredTeams.length}개 원정대
         </span>
       </div>
 
-      {/* Team List */}
-      {filtered.length === 0 ? (
+      {filteredTeams.length === 0 ? (
         <EmptyState message="해당 조건의 원정대가 없습니다" />
       ) : (
         <div className="space-y-6">
           {openTeams.length > 0 && (
             <div>
-              <h2 className="font-pixel text-[10px] text-accent-mint mb-3">RECRUITING ({openTeams.length})</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <h2 className="mb-3 font-pixel text-[10px] text-accent-mint">
+                RECRUITING ({openTeams.length})
+              </h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {openTeams.map(team => (
                   <TeamCard key={team.id} team={team} hackathons={hackathons} />
                 ))}
@@ -197,8 +213,10 @@ export default function CampPage() {
           )}
           {closedTeams.length > 0 && (
             <div>
-              <h2 className="font-pixel text-[10px] text-card-white/50 mb-3">CLOSED ({closedTeams.length})</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <h2 className="mb-3 font-pixel text-[10px] text-card-white/50">
+                CLOSED ({closedTeams.length})
+              </h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {closedTeams.map(team => (
                   <TeamCard key={team.id} team={team} hackathons={hackathons} />
                 ))}
@@ -211,18 +229,24 @@ export default function CampPage() {
   );
 }
 
-function TeamCard({ team, hackathons }: { team: Team; hackathons: Hackathon[] }) {
-  const hackathon = hackathons.find(h => h.slug === team.hackathonSlug);
+function TeamCard({
+  team,
+  hackathons,
+}: {
+  team: Team;
+  hackathons: Hackathon[];
+}) {
+  const hackathon = hackathons.find(item => item.slug === team.hackathonSlug);
 
   return (
     <Card className="flex flex-col">
-      <div className="flex items-start justify-between mb-2">
-        <h3 className="font-dunggeunmo font-bold text-base">{team.name}</h3>
+      <div className="mb-2 flex items-start justify-between">
+        <h3 className="font-dunggeunmo text-base font-bold">{team.name}</h3>
         <span
-          className={`font-pixel text-[8px] px-2 py-0.5 ${
+          className={`px-2 py-0.5 font-pixel text-[8px] ${
             team.isOpen
-              ? 'bg-accent-mint/20 text-accent-mint border border-accent-mint/40'
-              : 'bg-dark-border/20 text-dark-bg/50 border border-dark-border'
+              ? 'border border-accent-mint/40 bg-accent-mint/20 text-accent-mint'
+              : 'border border-dark-border bg-dark-border/20 text-dark-bg/50'
           }`}
         >
           {team.isOpen ? 'RECRUITING' : 'CLOSED'}
@@ -230,19 +254,19 @@ function TeamCard({ team, hackathons }: { team: Team; hackathons: Hackathon[] })
       </div>
 
       {hackathon && (
-        <span className="font-pixel text-[8px] text-accent-purple mb-2 block">
+        <span className="mb-2 block font-pixel text-[8px] text-accent-purple">
           {hackathon.title}
         </span>
       )}
 
-      <p className="font-dunggeunmo text-sm text-dark-bg/70 mb-3">{team.intro}</p>
+      <p className="mb-3 font-dunggeunmo text-sm text-dark-bg/70">{team.intro}</p>
 
       {team.lookingFor.length > 0 && (
-        <div className="flex flex-wrap gap-1 mb-3">
+        <div className="mb-3 flex flex-wrap gap-1">
           {team.lookingFor.map(role => (
             <span
               key={role}
-              className="font-pixel text-[8px] px-2 py-0.5 bg-accent-yellow/20 text-accent-orange border border-accent-yellow/40"
+              className="border border-accent-yellow/40 bg-accent-yellow/20 px-2 py-0.5 font-pixel text-[8px] text-accent-orange"
             >
               {role}
             </span>
@@ -250,20 +274,29 @@ function TeamCard({ team, hackathons }: { team: Team; hackathons: Hackathon[] })
         </div>
       )}
 
-      <div className="mt-auto flex items-center justify-between">
+      <div className="mt-auto flex items-center justify-between gap-3">
         <span className="font-dunggeunmo text-xs text-dark-bg/50">
           {team.memberCount}명
         </span>
-        {team.isOpen && team.contactUrl && (
-          <a
-            href={team.contactUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-pixel text-[8px] text-accent-orange hover:underline"
+        <div className="flex items-center gap-2">
+          <PixelButton
+            href={`/war-room/${team.id}`}
+            variant="ghost"
+            className="px-2 py-1 text-[8px]"
           >
-            연락하기 →
-          </a>
-        )}
+            작전실 열기
+          </PixelButton>
+          {team.isOpen && team.contactUrl && (
+            <a
+              href={team.contactUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-pixel text-[8px] text-accent-orange hover:underline"
+            >
+              연락하기
+            </a>
+          )}
+        </div>
       </div>
     </Card>
   );
