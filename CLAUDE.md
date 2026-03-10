@@ -40,6 +40,7 @@
 - 중요한 결정에는 이유, 심사 기준 연결, 검증 결과를 남긴다.
 - 일일 로그는 `docs/daily/`에 남긴다.
 - 마일스톤 스냅샷은 `ai-context/archive/YYYY-MM-DD/`에 남긴다.
+- 개발 과정 증빙(PPT 소재)은 `docs/evidence/`에 Phase별로 남긴다.
 
 ## Automation Index
 - `.claude/automations/docs-nightly-organizer.prompt.md`
