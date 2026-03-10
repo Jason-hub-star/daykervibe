@@ -100,10 +100,10 @@ export default function HackathonsPage() {
       {filtered.length === 0 ? (
         <EmptyState message="해당 조건의 해커톤이 없습니다" />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map(hackathon => (
             <Link key={hackathon.slug} href={`/hackathons/${hackathon.slug}`}>
-              <Card className="h-full flex flex-col">
+              <Card className="h-full flex flex-col p-3">
                 {hackathon.thumbnailUrl && (
                   <div className="mb-3 overflow-hidden border-2 border-dark-border/70 bg-dark-bg/5">
                     <Image
@@ -112,7 +112,7 @@ export default function HackathonsPage() {
                       width={1200}
                       height={900}
                       sizes="(min-width: 1152px) 552px, (min-width: 640px) calc((100vw - 3rem) / 2), calc(100vw - 2rem)"
-                      className="h-auto w-full object-cover"
+                      className="max-h-[160px] w-full object-cover"
                     />
                   </div>
                 )}

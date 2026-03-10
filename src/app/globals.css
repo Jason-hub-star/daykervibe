@@ -10,6 +10,7 @@
   --color-accent-mint: #98F0E1;
   --color-accent-pink: #FF79C9;
   --color-accent-purple: #A98DF8;
+  --color-dark-card: #252025;
 
   /* ── Fonts ── */
   --font-pixel: var(--font-press-start), monospace;

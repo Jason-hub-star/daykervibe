@@ -99,7 +99,7 @@ export default function HackathonDetailPage() {
       </div>
 
       {normalizedHackathon.thumbnailUrl && (
-        <div className="mb-6 overflow-hidden border-2 border-dark-border bg-dark-border/30">
+        <div className="mb-6 overflow-hidden border-2 border-dark-border bg-dark-border/30 lg:mx-auto lg:w-3/5">
           <Image
             src={normalizedHackathon.thumbnailUrl}
             alt={`${normalizedHackathon.title} banner`}

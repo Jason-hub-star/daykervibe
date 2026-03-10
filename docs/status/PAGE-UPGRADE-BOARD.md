@@ -39,6 +39,25 @@ Source of truth for route-level execution status.
 - All pages: font delivery switched to woff2, DungGeunMo preload disabled
 - Unused public assets cleaned up (7 files + design_reference/ directory)
 
+## 2026-03-10 Addendum - UI Polish: Dark Card, Filter, Typography
+
+- `/camp`
+  - 필터 UI: 모바일 `<select>` 드롭다운 + 데스크톱 `truncate` 버튼 행
+  - TeamCard: `variant="dark"` 적용 (배경 `#252025`, 오렌지 테두리, 크림 텍스트)
+  - NEW EXPEDITION 폼: 다크 카드 + input 색상 전환
+  - 해커톤 태그 텍스트 강조 (`font-dunggeunmo text-xs font-bold`)
+- `/hackathons`
+  - 카드 그리드 `lg:grid-cols-3`, 썸네일 `max-h-[160px]`, 패딩 `p-3`
+- `/hackathons/:slug`
+  - 배너 이미지 데스크톱 `lg:w-3/5 lg:mx-auto`
+- `/war-room/:teamId`
+  - BASECAMP 카드 `variant="dark"` 적용
+  - 워크플로 컬럼 제목, 제출 단계 버튼, 팀 구성 뱃지 텍스트 강조
+- `src/components/ui/Card.tsx`
+  - `variant` prop 추가 (`default` | `dark`)
+- `src/app/globals.css`
+  - `--color-dark-card: #252025` 추가
+
 ## 2026-03-10 Addendum - SSOT Strict Alignment
 
 - `/hackathons/:slug`

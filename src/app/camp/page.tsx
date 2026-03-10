@@ -148,28 +148,28 @@ function CampPageContent() {
       )}
 
       {showForm && (
-        <Card hover={false} className="mb-6">
+        <Card hover={false} variant="dark" className="mb-6">
           <h2 className="mb-4 font-pixel text-[10px] text-accent-yellow">NEW EXPEDITION</h2>
           <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+              <label className="mb-1 block font-dunggeunmo text-xs text-card-white/70">
                 원정대명 *
               </label>
               <input
                 value={formName}
                 onChange={event => setFormName(event.target.value)}
-                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
+                className="w-full border-2 border-dark-border bg-dark-bg px-3 py-2 font-dunggeunmo text-sm text-card-white"
                 placeholder="예: Team Alpha"
               />
             </div>
             <div>
-              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+              <label className="mb-1 block font-dunggeunmo text-xs text-card-white/70">
                 연결 해커톤
               </label>
               <select
                 value={formHackathon}
                 onChange={event => setFormHackathon(event.target.value)}
-                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
+                className="w-full border-2 border-dark-border bg-dark-bg px-3 py-2 font-dunggeunmo text-sm text-card-white"
               >
                 <option value="">선택 없음</option>
                 {hackathons.map(hackathon => (
@@ -180,34 +180,34 @@ function CampPageContent() {
               </select>
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">소개</label>
+              <label className="mb-1 block font-dunggeunmo text-xs text-card-white/70">소개</label>
               <textarea
                 value={formIntro}
                 onChange={event => setFormIntro(event.target.value)}
-                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
+                className="w-full border-2 border-dark-border bg-dark-bg px-3 py-2 font-dunggeunmo text-sm text-card-white"
                 rows={2}
                 placeholder="팀 소개를 적어주세요."
               />
             </div>
             <div>
-              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+              <label className="mb-1 block font-dunggeunmo text-xs text-card-white/70">
                 모집 역할 (콤마 구분)
               </label>
               <input
                 value={formLookingFor}
                 onChange={event => setFormLookingFor(event.target.value)}
-                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
+                className="w-full border-2 border-dark-border bg-dark-bg px-3 py-2 font-dunggeunmo text-sm text-card-white"
                 placeholder="예: Frontend, Designer"
               />
             </div>
             <div>
-              <label className="mb-1 block font-dunggeunmo text-xs text-dark-bg/70">
+              <label className="mb-1 block font-dunggeunmo text-xs text-card-white/70">
                 연락 링크
               </label>
               <input
                 value={formContact}
                 onChange={event => setFormContact(event.target.value)}
-                className="w-full border-2 border-dark-border bg-dark-bg/5 px-3 py-2 font-dunggeunmo text-sm text-dark-bg"
+                className="w-full border-2 border-dark-border bg-dark-bg px-3 py-2 font-dunggeunmo text-sm text-card-white"
                 placeholder="https://..."
               />
             </div>
@@ -216,31 +216,49 @@ function CampPageContent() {
         </Card>
       )}
 
-      <div className="mb-6 flex flex-wrap gap-2">
-        <button
-          onClick={() => handleFilterChange('all')}
-          className={`min-h-10 border-2 px-3 py-2 font-pixel text-[10px] transition-colors ${
-            filter === 'all'
-              ? 'border-accent-orange bg-accent-orange text-dark-bg'
-              : 'border-dark-border bg-transparent text-card-white/70 hover:border-card-white/50'
-          }`}
+      <div className="mb-6">
+        {/* 모바일: select 드롭다운 */}
+        <select
+          value={filter}
+          onChange={e => handleFilterChange(e.target.value)}
+          className="mb-2 min-h-10 w-full border-2 border-dark-border bg-dark-bg px-3 py-2 font-pixel text-[10px] text-card-white sm:hidden"
         >
-          전체
-        </button>
-        {hackathons.map(hackathon => (
+          <option value="all">전체</option>
+          {hackathons.map(hackathon => (
+            <option key={hackathon.slug} value={hackathon.slug}>
+              {hackathon.title}
+            </option>
+          ))}
+        </select>
+
+        {/* 데스크톱: 버튼 행 */}
+        <div className="hidden flex-wrap gap-2 sm:flex">
           <button
-            key={hackathon.slug}
-            onClick={() => handleFilterChange(hackathon.slug)}
-            className={`min-h-10 max-w-full border-2 px-3 py-2 text-left font-pixel text-[9px] leading-relaxed transition-colors ${
-              filter === hackathon.slug
+            onClick={() => handleFilterChange('all')}
+            className={`min-h-10 border-2 px-3 py-2 font-pixel text-[10px] transition-colors ${
+              filter === 'all'
                 ? 'border-accent-orange bg-accent-orange text-dark-bg'
                 : 'border-dark-border bg-transparent text-card-white/70 hover:border-card-white/50'
             }`}
           >
-            {hackathon.title}
+            전체
           </button>
-        ))}
-        <span className="basis-full font-dunggeunmo text-xs text-card-white/50">
+          {hackathons.map(hackathon => (
+            <button
+              key={hackathon.slug}
+              onClick={() => handleFilterChange(hackathon.slug)}
+              className={`min-h-10 max-w-[180px] truncate border-2 px-3 py-2 text-left font-pixel text-[9px] leading-relaxed transition-colors ${
+                filter === hackathon.slug
+                  ? 'border-accent-orange bg-accent-orange text-dark-bg'
+                  : 'border-dark-border bg-transparent text-card-white/70 hover:border-card-white/50'
+              }`}
+            >
+              {hackathon.title}
+            </button>
+          ))}
+        </div>
+
+        <span className="mt-2 block font-dunggeunmo text-xs text-card-white/50">
           {filteredTeams.length}개 원정대
         </span>
       </div>
@@ -290,14 +308,14 @@ function TeamCard({
   const hasContact = team.isOpen && isValidPublicContactUrl(team.contactUrl);
 
   return (
-    <Card className="flex flex-col">
+    <Card variant="dark" className="flex flex-col">
       <div className="mb-2 flex items-start justify-between">
         <h3 className="font-dunggeunmo text-base font-bold">{team.name}</h3>
         <span
           className={`px-2 py-0.5 font-pixel text-[8px] ${
             team.isOpen
-              ? 'border border-accent-mint/45 bg-accent-mint/35 text-dark-bg'
-              : 'border border-dark-border bg-dark-border/20 text-dark-bg/50'
+              ? 'border border-accent-mint/45 bg-accent-mint/35 text-accent-mint'
+              : 'border border-card-white/20 bg-card-white/10 text-card-white/50'
           }`}
         >
           {team.isOpen ? 'RECRUITING' : 'CLOSED'}
@@ -305,12 +323,12 @@ function TeamCard({
       </div>
 
       {hackathon && (
-        <span className="mb-2 inline-flex max-w-full items-center border border-accent-purple/30 bg-accent-purple/14 px-2 py-1 font-pixel text-[8px] text-dark-bg/78">
+        <span className="mb-2 inline-flex max-w-full items-center border border-accent-purple/30 bg-accent-purple/14 px-2 py-1 font-dunggeunmo text-xs font-bold text-accent-purple">
           {hackathon.title}
         </span>
       )}
 
-      <p className="mb-3 font-dunggeunmo text-sm text-dark-bg/70">{team.intro}</p>
+      <p className="mb-3 font-dunggeunmo text-sm text-card-white/70">{team.intro}</p>
 
       {team.lookingFor.length > 0 && (
         <div className="mb-3 flex flex-wrap gap-1">
@@ -326,7 +344,7 @@ function TeamCard({
       )}
 
       <div className="mt-auto flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <span className="font-dunggeunmo text-xs text-dark-bg/50">{team.memberCount}명</span>
+        <span className="font-dunggeunmo text-xs text-card-white/50">{team.memberCount}명</span>
         <div className="flex w-full flex-wrap items-center justify-end gap-2 sm:w-auto">
           <PixelButton
             href={`/war-room/${team.id}`}
@@ -346,12 +364,12 @@ function TeamCard({
                 연락하기
               </a>
             ) : (
-              <span className="inline-flex min-h-10 items-center border border-dark-border/35 bg-dark-bg/5 px-3 font-pixel text-[9px] text-dark-bg/45">
+              <span className="inline-flex min-h-10 items-center border border-card-white/15 bg-card-white/5 px-3 font-pixel text-[9px] text-card-white/45">
                 연락처 준비중
               </span>
             )
           ) : (
-            <span className="inline-flex min-h-10 items-center border border-dark-border/35 bg-dark-bg/5 px-3 font-pixel text-[9px] text-dark-bg/45">
+            <span className="inline-flex min-h-10 items-center border border-card-white/15 bg-card-white/5 px-3 font-pixel text-[9px] text-card-white/45">
               모집 마감
             </span>
           )}

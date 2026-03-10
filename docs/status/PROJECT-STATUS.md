@@ -1,5 +1,29 @@
 # Project Status
 
+## 2026-03-10 Addendum - UI Polish: Dark Card, Filter, Typography
+
+- Camp 페이지 필터 UI 개선:
+  - 모바일(`< sm`): `<select>` 드롭다운으로 전환 (긴 해커톤 타이틀 대응)
+  - 데스크톱(`≥ sm`): 기존 버튼 행 유지 + `truncate max-w-[180px]` 적용
+- Card 컴포넌트에 `variant="dark"` 지원 추가:
+  - 배경: `--color-dark-card: #252025`, 테두리: `accent-orange/30`
+  - 텍스트: `card-white` 계열로 전환
+- 다크 카드 적용 대상:
+  - `/camp` TeamCard (모집 카드)
+  - `/camp` NEW EXPEDITION 폼 (input/select/textarea 포함)
+  - `/war-room/:teamId` BASECAMP 카드
+- `/hackathons` 카드 그리드 컴팩트화:
+  - `lg:grid-cols-3` 추가, 썸네일 `max-h-[160px]`, 카드 패딩 `p-3`
+- `/hackathons/:slug` 배너 이미지 데스크톱 축소:
+  - `lg:w-3/5 lg:mx-auto` 적용
+- 텍스트 가독성 강화:
+  - Camp 해커톤 태그: `font-dunggeunmo text-xs font-bold`
+  - War Room 워크플로 컬럼 제목: `font-dunggeunmo text-sm font-bold`
+  - War Room 제출 단계 버튼 + BASECAMP 뱃지: `font-dunggeunmo text-sm font-bold`
+- Validation:
+  - `npm run lint` passed
+  - `npm run build` passed
+
 ## 2026-03-10 Addendum - Asset Cleanup & Detail Banner Policy
 
 - Removed unused public assets after full reference audit:

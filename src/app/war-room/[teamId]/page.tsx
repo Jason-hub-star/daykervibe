@@ -468,7 +468,7 @@ export default function WarRoomPage() {
     <PageShell className="overflow-x-hidden">
       <h1 className="mb-6 font-pixel text-lg text-accent-orange">WAR ROOM</h1>
 
-      <Card hover={false} className="relative mb-6 overflow-hidden">
+      <Card hover={false} variant="dark" className="relative mb-6 overflow-hidden">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.3]"
@@ -480,29 +480,29 @@ export default function WarRoomPage() {
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             <div>
-              <span className="block font-dunggeunmo text-xs text-dark-bg/50">원정대</span>
+              <span className="block font-dunggeunmo text-xs text-card-white/50">원정대</span>
               <span className="font-dunggeunmo font-bold">{currentTeam.name}</span>
             </div>
             <div>
-              <span className="block font-dunggeunmo text-xs text-dark-bg/50">연결 해커톤</span>
+              <span className="block font-dunggeunmo text-xs text-card-white/50">연결 해커톤</span>
               <span className="break-words font-dunggeunmo font-bold">
                 {hackathon?.title ?? '미연결'}
               </span>
             </div>
             <div>
-              <span className="block font-dunggeunmo text-xs text-dark-bg/50">제출 단계</span>
-              <span className="inline-flex items-center border border-accent-mint/35 bg-accent-mint/20 px-2 py-1 font-pixel text-[9px] text-dark-bg">
+              <span className="block font-dunggeunmo text-xs text-card-white/50">제출 단계</span>
+              <span className="inline-flex items-center border border-accent-mint/35 bg-accent-mint/20 px-2 py-1 font-dunggeunmo text-sm font-bold text-accent-mint">
                 {STAGES.find(stage => stage.key === currentStage)?.label}
               </span>
             </div>
             <div>
-              <span className="block font-dunggeunmo text-xs text-dark-bg/50">팀 구성</span>
-              <span className="inline-flex items-center border border-accent-purple/30 bg-accent-purple/14 px-2 py-1 font-pixel text-[9px] text-dark-bg">
+              <span className="block font-dunggeunmo text-xs text-card-white/50">팀 구성</span>
+              <span className="inline-flex items-center border border-accent-purple/30 bg-accent-purple/14 px-2 py-1 font-dunggeunmo text-sm font-bold text-accent-purple">
                 {currentTeam.isOpen ? '모집중' : '구성 완료'}
               </span>
             </div>
             <div>
-              <span className="block font-dunggeunmo text-xs text-dark-bg/50">멤버</span>
+              <span className="block font-dunggeunmo text-xs text-card-white/50">멤버</span>
               <span className="font-dunggeunmo font-bold">{members.length || currentTeam.memberCount}명</span>
             </div>
           </div>
@@ -537,7 +537,7 @@ export default function WarRoomPage() {
                 <button
                   key={stage.key}
                   onClick={() => handleStageChange(stage.key)}
-                  className={`min-h-10 min-w-[88px] flex-none border-2 px-3 py-2 font-pixel text-[8px] transition-colors ${isActive
+                  className={`min-h-10 min-w-[88px] flex-none border-2 px-3 py-2 font-dunggeunmo text-sm font-bold transition-colors ${isActive
                     ? 'border-accent-orange bg-accent-orange text-dark-bg'
                     : isPast
                       ? 'border-accent-mint/40 bg-accent-mint/20 text-accent-mint'
@@ -576,7 +576,7 @@ export default function WarRoomPage() {
                   className={`min-h-[120px] border-2 p-3 transition-colors ${isColumnActive ? 'border-accent-orange/70 bg-accent-orange/5' : 'border-dark-border'
                     }`}
                 >
-                  <h3 className="mb-2 font-pixel text-[8px] text-accent-purple">{column.label}</h3>
+                  <h3 className="mb-2 font-dunggeunmo text-sm font-bold text-accent-purple">{column.label}</h3>
                   <div
                     className="space-y-2 rounded-sm"
                     onDragOver={event => handleColumnDragOver(event, column.key)}
