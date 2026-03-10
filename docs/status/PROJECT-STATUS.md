@@ -201,10 +201,11 @@ Product: `Expedition Hub`
 - `docs/status/INTEGRITY-REPORT.md`, `ai-context/master-plan.md` 최신 상태 반영
 
 ## Next Actions
-1. Run one manual phone pass for soft-keyboard compression, final contrast, and touch comfort.
-2. Do one focused browser pass for the stricter public submit handoff flow.
-3. Finalize Submission 1 copy and remaining delivery planning docs.
-4. Prepare Vercel deployment evidence and PDF packaging assets once the product is frozen.
+1. 확장성 개선 구현 (우선순위순): Modal → 팀 삭제 → Ended 가드 → 역할 칩 → 랭킹 모달 → TeamCard 통합 → 포맷 유틸 중앙화
+2. Run one manual phone pass for soft-keyboard compression, final contrast, and touch comfort.
+3. Do one focused browser pass for the stricter public submit handoff flow.
+4. Finalize Submission 1 copy and remaining delivery planning docs.
+5. Prepare Vercel deployment evidence and PDF packaging assets once the product is frozen.
 
 ## Recent Decisions
 - 제품 서비스명은 `Expedition Hub`
