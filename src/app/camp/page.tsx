@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { getItem, setItem } from '@/lib/storage';
 import { STORAGE_KEYS } from '@/lib/storage/keys';
 import type { Hackathon, Team } from '@/lib/types';
@@ -11,15 +12,26 @@ import LoadingState from '@/components/ui/LoadingState';
 import EmptyState from '@/components/ui/EmptyState';
 
 export default function CampPage() {
+  return (
+    <Suspense fallback={<LoadingState />}>
+      <CampPageContent />
+    </Suspense>
+  );
+}
+
+function CampPageContent() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [teams, setTeams] = useState<Team[] | null>(null);
   const [hackathons, setHackathons] = useState<Hackathon[]>([]);
-  const [filter, setFilter] = useState<string>('all');
   const [showForm, setShowForm] = useState(false);
   const [formName, setFormName] = useState('');
   const [formIntro, setFormIntro] = useState('');
   const [formHackathon, setFormHackathon] = useState('');
   const [formLookingFor, setFormLookingFor] = useState('');
   const [formContact, setFormContact] = useState('');
+  const filter = searchParams.get('hackathon')?.trim() || 'all';
 
   useEffect(() => {
     let cancelled = false;
@@ -45,6 +57,20 @@ export default function CampPage() {
     filter === 'all' ? teams : teams.filter(team => team.hackathonSlug === filter);
   const openTeams = filteredTeams.filter(team => team.isOpen);
   const closedTeams = filteredTeams.filter(team => !team.isOpen);
+  const activeHackathon = hackathons.find(hackathon => hackathon.slug === filter);
+
+  function handleFilterChange(nextFilter: string) {
+    const nextSearchParams = new URLSearchParams(searchParams.toString());
+
+    if (nextFilter === 'all') {
+      nextSearchParams.delete('hackathon');
+    } else {
+      nextSearchParams.set('hackathon', nextFilter);
+    }
+
+    const nextQuery = nextSearchParams.toString();
+    router.push(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
+  }
 
   function handleCreate() {
     if (!formName.trim()) return;
@@ -85,8 +111,21 @@ export default function CampPage() {
           <p className="font-dunggeunmo text-card-white/70">
             원정대를 찾거나 새 원정대를 만들어보세요
           </p>
+          {activeHackathon && (
+            <p className="mt-2 font-dunggeunmo text-xs text-accent-mint">
+              Showing teams for {activeHackathon.title}
+            </p>
+          )}
         </div>
-        <PixelButton onClick={() => setShowForm(!showForm)}>
+        <PixelButton
+          onClick={() => {
+            if (!showForm && filter !== 'all' && !formHackathon) {
+              setFormHackathon(filter);
+            }
+
+            setShowForm(!showForm);
+          }}
+        >
           {showForm ? '닫기' : '+ 원정대 만들기'}
         </PixelButton>
       </div>
@@ -166,7 +205,7 @@ export default function CampPage() {
 
       <div className="mb-6 flex gap-2 overflow-x-auto">
         <button
-          onClick={() => setFilter('all')}
+          onClick={() => handleFilterChange('all')}
           className={`whitespace-nowrap border-2 px-3 py-1.5 font-pixel text-[10px] transition-colors ${
             filter === 'all'
               ? 'border-accent-orange bg-accent-orange text-dark-bg'
@@ -178,7 +217,7 @@ export default function CampPage() {
         {hackathons.map(hackathon => (
           <button
             key={hackathon.slug}
-            onClick={() => setFilter(hackathon.slug)}
+            onClick={() => handleFilterChange(hackathon.slug)}
             className={`whitespace-nowrap border-2 px-3 py-1.5 font-pixel text-[10px] transition-colors ${
               filter === hackathon.slug
                 ? 'border-accent-orange bg-accent-orange text-dark-bg'

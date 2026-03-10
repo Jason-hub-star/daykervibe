@@ -80,3 +80,20 @@
 - Next:
   1. Implement `/camp?hackathon=:slug`
   2. Continue responsive and privacy QA
+
+## Phase 4 - Camp Query Filter Flow
+- Scope:
+  - Make `/camp` read the `hackathon` search param as its active filter source
+  - Update the hackathon detail teams CTA to link into `/camp?hackathon=:slug`
+- Why:
+  - SSOT requires the camp board to support hackathon-scoped browsing from the detail page flow.
+  - This closes the last known navigation mismatch between the public recruiting journey and the canonical route spec.
+- Validation:
+  - `/camp?hackathon=daker-handover-2026-03` now filters the list to that hackathon's teams
+  - Camp filter button clicks update the URL query instead of only local component state
+  - The teams section CTA now deep-links into the scoped camp view
+  - `npm run lint` passed
+  - `npm run build` passed
+- Next:
+  1. Continue responsive QA around `/camp` and `/war-room/:teamId`
+  2. Run final privacy checks for `private-hidden` fields

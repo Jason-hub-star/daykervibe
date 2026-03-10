@@ -94,7 +94,10 @@ export default function TeamsSection({
 
       {data.campEnabled && (
         <div className="text-center pt-2">
-          <PixelButton href="/camp" variant="ghost">
+          <PixelButton
+            href={`/camp?hackathon=${encodeURIComponent(hackathonSlug)}`}
+            variant="ghost"
+          >
             CAMP에서 팀 찾기
           </PixelButton>
         </div>
