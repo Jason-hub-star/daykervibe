@@ -58,6 +58,25 @@ Source of truth for route-level execution status.
 - `src/app/globals.css`
   - `--color-dark-card: #252025` 추가
 
+## 2026-03-10 Addendum - Extensibility Implementation
+
+- **공통 컴포넌트 레이어 신규**
+  - `src/components/ui/Modal.tsx` — 재사용 가능한 8비트 스타일 모달 (ESC/오버레이 닫기)
+  - `src/components/ui/TeamCard.tsx` — camp/detail 두 variant 지원하는 통합 팀 카드
+  - `src/lib/format.ts` — 포맷 유틸 중앙화 (6개 파일 중복 제거)
+- `/camp`
+  - TeamCard를 공용 `TeamCard.tsx`로 교체, 기존 인라인 구현 제거
+- `/hackathons/:slug`
+  - TeamsSection이 공용 `TeamCard.tsx`로 교체됨
+  - SummaryBar, PrizeSection, ScheduleSection이 `src/lib/format.ts` import로 전환
+- `/war-room/:teamId`
+  - TEAM MEMBERS 섹션 추가, `roleLabel` 칩 표시 (team-local only)
+- `/hackathons`, `/rankings`
+  - 포맷 함수 import를 `src/lib/format.ts`로 통합
+- SSOT 위반으로 의도적 제외:
+  - 팀 삭제: Wireframe/Handover가 "수정, 모집 마감 처리"만 명시
+  - 랭킹 모달: Schema에 추가 데이터 없음
+
 ## 2026-03-10 Addendum - SSOT Strict Alignment
 
 - `/hackathons/:slug`

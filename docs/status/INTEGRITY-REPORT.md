@@ -68,8 +68,23 @@ Result: pass with follow-up items
 - Home hero, featured cards, list cards, detail hero, rankings banner all have explicit responsive `sizes`.
 - Font delivery uses woff2; DungGeunMo is no longer a render-blocking preload.
 
+## 2026-03-10 Addendum - Extensibility & Component Layer
+
+- 확장성 분석에서 도출한 7개 항목 중 SSOT 준수 5개 구현 완료, 2개 의도적 제외.
+- 신규 공용 컴포넌트 레이어:
+  - `src/components/ui/Modal.tsx` — ESC/오버레이 닫기, 8비트 토큰
+  - `src/components/ui/TeamCard.tsx` — camp/detail variant 통합
+  - `src/lib/format.ts` — 포맷 유틸 6개 중앙화
+- 중복 코드 제거: 6개 파일에서 인라인 포맷 함수 제거, camp/detail 팀 카드 중복 제거
+- War Room에 TEAM MEMBERS 역할 칩 추가 (team-local only, 공개 노출 없음)
+- `formatDatetime`/`formatDateTime` 중복 후속 수정 (`a4fa197`)
+- SSOT 위반 제외 판단 기록:
+  - 팀 삭제 → Wireframe/Handover "수정, 모집 마감 처리"만 명시
+  - 랭킹 모달 → Schema 추가 데이터 없음, Wireframe 테이블 형식만 명시
+
 ## Integrity Verdict
 
 - The repo is no longer in a bootstrap-only state.
 - The main integrity risk is not missing implementation coverage, but final submission packaging and non-emulated real-device QA.
 - Asset delivery is now aligned: no orphan files, no ghost references, no hardcoded common banners.
+- Component layer is now centralized: shared Modal, TeamCard, and format utilities reduce duplication and improve maintainability.
