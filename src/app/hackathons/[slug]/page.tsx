@@ -20,14 +20,23 @@ export default function HackathonDetailPage() {
   const [activeTab, setActiveTab] = useState<HackathonSectionType>('overview');
 
   useEffect(() => {
-    const all = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS) ?? [];
-    const found = all.find(h => h.slug === slug);
-    setHackathon(found ?? null);
+    let cancelled = false;
 
-    // Set first available tab
-    if (found && found.sections.length > 0) {
-      setActiveTab(found.sections[0].type);
-    }
+    queueMicrotask(() => {
+      if (cancelled) return;
+
+      const all = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS) ?? [];
+      const found = all.find(h => h.slug === slug);
+      setHackathon(found ?? null);
+
+      if (found && found.sections.length > 0) {
+        setActiveTab(found.sections[0].type);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [slug]);
 
   // Loading

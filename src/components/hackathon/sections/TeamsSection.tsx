@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { getItem } from '@/lib/storage';
 import { STORAGE_KEYS } from '@/lib/storage/keys';
 import type { Team } from '@/lib/types';
@@ -24,8 +23,17 @@ export default function TeamsSection({ content, hackathonSlug }: TeamsSectionPro
   const [teams, setTeams] = useState<Team[]>([]);
 
   useEffect(() => {
-    const all = getItem<Team[]>(STORAGE_KEYS.TEAMS) ?? [];
-    setTeams(all.filter(t => t.hackathonSlug === hackathonSlug));
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+      const all = getItem<Team[]>(STORAGE_KEYS.TEAMS) ?? [];
+      setTeams(all.filter(t => t.hackathonSlug === hackathonSlug));
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [hackathonSlug]);
 
   return (

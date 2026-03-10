@@ -35,8 +35,17 @@ export default function RankingsPage() {
   const [period, setPeriod] = useState<PeriodFilter>('all');
 
   useEffect(() => {
-    const data = getItem<RankingProfile[]>(STORAGE_KEYS.RANKINGS);
-    setRankings(data ?? []);
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+      const data = getItem<RankingProfile[]>(STORAGE_KEYS.RANKINGS);
+      setRankings(data ?? []);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (rankings === null) return <LoadingState />;

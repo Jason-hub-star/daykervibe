@@ -38,8 +38,17 @@ export default function HackathonsPage() {
   const [filter, setFilter] = useState<FilterKey>('all');
 
   useEffect(() => {
-    const data = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
-    setHackathons(data ?? []);
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+      const data = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
+      setHackathons(data ?? []);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (hackathons === null) return <LoadingState />;

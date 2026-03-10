@@ -24,8 +24,17 @@ export default function Home() {
   const [hackathons, setHackathons] = useState<Hackathon[] | null>(null);
 
   useEffect(() => {
-    const data = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
-    setHackathons(data ?? []);
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+      const data = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
+      setHackathons(data ?? []);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (hackathons === null) return <LoadingState />;

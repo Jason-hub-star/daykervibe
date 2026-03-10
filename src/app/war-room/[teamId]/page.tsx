@@ -55,34 +55,43 @@ export default function WarRoomPage() {
   const [newLinkLabel, setNewLinkLabel] = useState('');
 
   useEffect(() => {
-    const teams = getItem<Team[]>(STORAGE_KEYS.TEAMS) ?? [];
-    const t = teams.find(t => t.id === teamId);
-    setTeam(t ?? null);
+    let cancelled = false;
 
-    if (t?.hackathonSlug) {
-      const hacks = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS) ?? [];
-      setHackathon(hacks.find(h => h.slug === t.hackathonSlug) ?? null);
-    }
+    queueMicrotask(() => {
+      if (cancelled) return;
 
-    const allMembers = getItem<TeamMember[]>(STORAGE_KEYS.TEAM_MEMBERS) ?? [];
-    setMembers(allMembers.filter(m => m.teamId === teamId));
+      const teams = getItem<Team[]>(STORAGE_KEYS.TEAMS) ?? [];
+      const t = teams.find(teamEntry => teamEntry.id === teamId);
+      setTeam(t ?? null);
 
-    const allWarRooms = getItem<WarRoom[]>(STORAGE_KEYS.WAR_ROOMS) ?? [];
-    const wr = allWarRooms.find(w => w.teamId === teamId);
-    setWarRoom(wr ?? null);
+      if (t?.hackathonSlug) {
+        const hacks = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS) ?? [];
+        setHackathon(hacks.find(h => h.slug === t.hackathonSlug) ?? null);
+      }
 
-    if (wr) {
-      const allCards = getItem<WarRoomWorkflowCard[]>(STORAGE_KEYS.WAR_ROOM_WORKFLOW_CARDS) ?? [];
-      setCards(allCards.filter(c => c.warRoomId === wr.id));
+      const allMembers = getItem<TeamMember[]>(STORAGE_KEYS.TEAM_MEMBERS) ?? [];
+      setMembers(allMembers.filter(member => member.teamId === teamId));
 
-      const allChecks = getItem<WarRoomChecklistItem[]>(STORAGE_KEYS.WAR_ROOM_CHECKLIST) ?? [];
-      setChecklist(allChecks.filter(c => c.warRoomId === wr.id));
-    }
+      const allWarRooms = getItem<WarRoom[]>(STORAGE_KEYS.WAR_ROOMS) ?? [];
+      const wr = allWarRooms.find(w => w.teamId === teamId);
+      setWarRoom(wr ?? null);
 
-    const allArtifacts = getItem<SubmissionArtifact[]>(STORAGE_KEYS.SUBMISSION_ARTIFACTS) ?? [];
-    setArtifacts(allArtifacts);
+      if (wr) {
+        const allCards = getItem<WarRoomWorkflowCard[]>(STORAGE_KEYS.WAR_ROOM_WORKFLOW_CARDS) ?? [];
+        setCards(allCards.filter(card => card.warRoomId === wr.id));
 
-    setLoading(false);
+        const allChecks = getItem<WarRoomChecklistItem[]>(STORAGE_KEYS.WAR_ROOM_CHECKLIST) ?? [];
+        setChecklist(allChecks.filter(item => item.warRoomId === wr.id));
+      }
+
+      const allArtifacts = getItem<SubmissionArtifact[]>(STORAGE_KEYS.SUBMISSION_ARTIFACTS) ?? [];
+      setArtifacts(allArtifacts);
+      setLoading(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [teamId]);
 
   if (loading) return <LoadingState />;

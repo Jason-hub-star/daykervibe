@@ -24,10 +24,19 @@ export default function CampPage() {
   const [formContact, setFormContact] = useState('');
 
   useEffect(() => {
-    const t = getItem<Team[]>(STORAGE_KEYS.TEAMS);
-    setTeams(t ?? []);
-    const h = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
-    setHackathons(h ?? []);
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+      const t = getItem<Team[]>(STORAGE_KEYS.TEAMS);
+      const h = getItem<Hackathon[]>(STORAGE_KEYS.HACKATHONS);
+      setTeams(t ?? []);
+      setHackathons(h ?? []);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   if (teams === null) return <LoadingState />;

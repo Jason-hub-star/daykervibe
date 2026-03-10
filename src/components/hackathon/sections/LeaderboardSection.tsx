@@ -16,12 +16,22 @@ export default function LeaderboardSection({ content, hackathonSlug }: Leaderboa
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
 
   useEffect(() => {
-    const all = getItem<LeaderboardEntry[]>(STORAGE_KEYS.LEADERBOARDS) ?? [];
-    setEntries(
-      all
-        .filter(e => e.hackathonSlug === hackathonSlug)
-        .sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999)),
-    );
+    let cancelled = false;
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+
+      const all = getItem<LeaderboardEntry[]>(STORAGE_KEYS.LEADERBOARDS) ?? [];
+      setEntries(
+        all
+          .filter(e => e.hackathonSlug === hackathonSlug)
+          .sort((a, b) => (a.rank ?? 999) - (b.rank ?? 999)),
+      );
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [hackathonSlug]);
 
   return (
