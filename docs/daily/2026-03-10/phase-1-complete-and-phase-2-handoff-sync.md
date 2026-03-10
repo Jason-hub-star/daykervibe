@@ -66,3 +66,17 @@
   - The section-level CTA to `/camp` remains unchanged
 - Next:
   1. Reword status docs around discoverability and remaining SSOT gaps
+
+## Phase 3 - Status Wording Alignment
+- Scope:
+  - Reword status docs so `Done` means the war-room route is not only implemented but also reachable from public user flows
+  - Record the remaining SSOT gap `/camp?hackathon=:slug` as a follow-up item
+- Why:
+  - "페이지 존재"와 "사용자 흐름이 닫힘"은 다르므로 상태 문서도 그 기준을 따라야 한다.
+  - The next implementation step should be obvious to anyone picking up the repo.
+- Validation:
+  - Status docs now mention war-room entry from `/camp` and the hackathon detail teams section
+  - `/camp?hackathon=:slug` is explicitly tracked as the remaining SSOT gap
+- Next:
+  1. Implement `/camp?hackathon=:slug`
+  2. Continue responsive and privacy QA

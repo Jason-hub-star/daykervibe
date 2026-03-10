@@ -12,7 +12,7 @@ Product: `Expedition Hub`
 |-------|------|-----------|------|
 | Phase 0: Scaffold | **완료** | 타입, 스토리지, 시딩, 디자인 토큰, 라우트 골격 | localStorage 기반 구조 고정 |
 | Phase 1A: 셸 + 공개 페이지 | **완료** | TopNav, Footer, 상태 UI 3종, `/`, `/hackathons`, `/hackathons/:slug` | 상세 8개 섹션 구현 완료 |
-| Phase 1B: 협업 + 팀 페이지 | **완료** | `/camp`, `/rankings`, `/war-room/:teamId` | 원정대 모집, 글로벌 랭킹, 제출 준비 허브 반영 |
+| Phase 1B: 협업 + 팀 페이지 | **완료** | `/camp`, `/rankings`, `/war-room/:teamId` | 작전실 내부 구현과 공개 진입 흐름까지 정합화 완료 |
 | Phase 2: QA + 확장 | 진행중 | 반응형, 프라이버시 검증, 디자인 고도화, 제출 자산 정리 | 배포 및 제출 체크리스트 남음 |
 
 ## Completed Deliverables
@@ -22,9 +22,10 @@ Product: `Expedition Hub`
 - `src/app/hackathons/page.tsx` — 해커톤 목록, 상태 필터, 카드 그리드
 - `src/app/hackathons/[slug]/page.tsx` — 요약 바, 섹션 탭, 필수 8개 상세 섹션
 - `src/components/hackathon/sections/*` — overview / guide / eval / schedule / prize / teams / submit / leaderboard
-- `src/app/camp/page.tsx` — 원정대 모집 필터, 생성 폼, 모집 상태 카드
+- `src/app/camp/page.tsx` — 원정대 모집 필터, 생성 폼, 모집 상태 카드, 작전실 열기 CTA
 - `src/app/rankings/page.tsx` — 기간 기반 글로벌 랭킹 테이블
 - `src/app/war-room/[teamId]/page.tsx` — 베이스캠프 요약, 단계 관리, 제출 준비 허브
+- `src/components/hackathon/sections/TeamsSection.tsx` — 상세 팀 카드와 작전실 이동 CTA
 - `src/lib/storage/*`, `src/lib/types/*` — schema 정렬된 로컬 저장 및 시드 구조 유지
 
 ## Validation Snapshot
@@ -50,15 +51,16 @@ Product: `Expedition Hub`
 
 ## Open Gaps
 - 모바일/태블릿 반응형 세부 조정
+- `/camp?hackathon=:slug` 쿼리 필터 SSOT 반영
 - `private-hidden` 필드 미노출 최종 검증
 - 디자인 고도화(호버, 전환, 시각적 리듬)
 - Submission 1 기획서 문안 정리
 - Vercel 배포 및 제출 체크리스트 확정
 
 ## Next Actions
-1. 모바일/태블릿에서 `/war-room/:teamId` 중심 반응형 QA를 수행한다.
-2. 공개 페이지와 팀 로컬 데이터 경계가 schema/privacy 규칙과 일치하는지 검증한다.
-3. 애니메이션과 페이지 전환을 추가하되 기본 흐름 가독성을 해치지 않도록 조정한다.
+1. `/camp?hackathon=:slug` 쿼리 필터를 구현해 camp 흐름을 SSOT와 맞춘다.
+2. 모바일/태블릿에서 `/war-room/:teamId` 중심 반응형 QA를 수행한다.
+3. 공개 페이지와 팀 로컬 데이터 경계가 schema/privacy 규칙과 일치하는지 검증한다.
 4. Expedition Hub 기준 기획서 초안과 제출 체크리스트를 작성한다.
 5. Vercel 배포 후 공개 URL 검수 흐름을 고정한다.
 
