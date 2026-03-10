@@ -143,6 +143,23 @@ Product: `Expedition Hub`
   2. Finalize Submission 1 copy and align any remaining stale planning docs
   3. Prepare deployment evidence and PDF packaging assets once the product is frozen
 
+## 2026-03-10 Addendum - Extensibility Implementation (SSOT-Compliant)
+
+- 확장성 분석(`docs/evidence/extensibility-analysis-2026-03-10.md`)에서 도출한 7개 항목 중 SSOT 준수 5개 구현 완료.
+- 구현 완료 항목:
+  1. **포맷 유틸 중앙화** — `src/lib/format.ts` 생성, 6개 파일에서 중복 함수(`formatPrize`, `formatDateTime`, `formatDate`, `dDay`, `formatKRW`, `formatPoints`) 제거 및 import 교체. `formatDatetime`/`formatDateTime` 중복도 후속 커밋으로 통합.
+  2. **TeamCard 통합** — `src/components/ui/TeamCard.tsx` 생성 (camp/detail variant 지원), `camp/page.tsx`와 `TeamsSection.tsx` 중복 제거.
+  3. **Modal 컴포넌트** — `src/components/ui/Modal.tsx` 생성 (ESC 닫기, 오버레이 클릭 닫기, 8비트 디자인 토큰 적용).
+  4. **Ended 가드 검증** — TeamsSection + SubmitSection에서 이미 Wireframe Addendum 요구사항 충족 확인.
+  5. **역할 칩** — War Room에 TEAM MEMBERS 섹션 추가, `roleLabel` 칩 표시 (team-local only, 공개 노출 없음).
+- SSOT 위반으로 의도적 제외:
+  - 팀 삭제 — Wireframe/Handover가 "수정, 모집 마감 처리"만 명시
+  - 랭킹 모달 — Schema에 추가 데이터 없음, Wireframe은 테이블 형식만 명시
+- 영향받은 파일 (12개): `src/lib/format.ts`, `src/components/ui/Modal.tsx`, `src/components/ui/TeamCard.tsx`, `src/app/camp/page.tsx`, `src/app/hackathons/page.tsx`, `src/app/rankings/page.tsx`, `src/app/war-room/[teamId]/page.tsx`, `src/components/hackathon/SummaryBar.tsx`, `src/components/hackathon/sections/PrizeSection.tsx`, `src/components/hackathon/sections/ScheduleSection.tsx`, `src/components/hackathon/sections/TeamsSection.tsx`, `src/lib/hackathon-detail.ts`
+- Validation:
+  - `npm run lint` passed
+  - `npm run build` passed
+
 ## Current Phase
 **Phase 2: QA + 확장 — IN PROGRESS**
 
@@ -155,7 +172,7 @@ Product: `Expedition Hub`
 | Phase 2: QA + 확장 | 진행중 | 반응형, 프라이버시 검증, 디자인 고도화, 제출 자산 정리 | 배포 및 제출 체크리스트 남음 |
 
 ## Completed Deliverables
-- `src/components/ui/*` — Card, StatusBadge, PixelButton, Loading/Empty/Error 상태 UI
+- `src/components/ui/*` — Card, StatusBadge, PixelButton, Modal, TeamCard, Loading/Empty/Error 상태 UI
 - `src/components/layout/*` — TopNav, Footer, PageShell
 - `src/app/page.tsx` — 랜딩, 주요 CTA, featured hackathon, 포털 가치 섹션
 - `src/app/hackathons/page.tsx` — 해커톤 목록, 상태 필터, 카드 그리드
@@ -165,6 +182,7 @@ Product: `Expedition Hub`
 - `src/app/rankings/page.tsx` — 기간 기반 글로벌 랭킹 테이블
 - `src/app/war-room/[teamId]/page.tsx` — 베이스캠프 요약, 단계 관리, 제출 준비 허브
 - `src/components/hackathon/sections/TeamsSection.tsx` — 상세 팀 카드와 작전실 이동 CTA, `/camp?hackathon=:slug` deep link
+- `src/lib/format.ts` — 포맷 유틸 중앙화 (formatPrize, formatDateTime, formatDate, dDay, formatKRW, formatPoints)
 - `src/lib/storage/*`, `src/lib/types/*` — schema 정렬된 로컬 저장 및 시드 구조 유지
 
 ## Validation Snapshot
@@ -201,7 +219,7 @@ Product: `Expedition Hub`
 - `docs/status/INTEGRITY-REPORT.md`, `ai-context/master-plan.md` 최신 상태 반영
 
 ## Next Actions
-1. 확장성 개선 구현 (우선순위순): Modal → 팀 삭제 → Ended 가드 → 역할 칩 → 랭킹 모달 → TeamCard 통합 → 포맷 유틸 중앙화
+1. ~~확장성 개선 구현~~ — **완료** (SSOT 준수 5개 구현, 2개 SSOT 위반으로 제외)
 2. Run one manual phone pass for soft-keyboard compression, final contrast, and touch comfort.
 3. Do one focused browser pass for the stricter public submit handoff flow.
 4. Finalize Submission 1 copy and remaining delivery planning docs.

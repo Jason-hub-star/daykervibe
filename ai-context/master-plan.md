@@ -18,6 +18,7 @@
   - 링크 관리
   - 데스크톱 drag-and-drop
   - 모바일 move controls
+  - TEAM MEMBERS 역할 칩 (roleLabel, team-local only)
 - 반응형 1차 QA 및 수정 완료
 - 공개/팀 로컬 프라이버시 경계 검증 완료
 - 데스크톱 수동 drag sanity pass 완료
@@ -27,6 +28,12 @@
   - 상세 배너 thumbnailUrl 동적 정책 적용
   - 미사용 에셋 7개 + design_reference/ 삭제
   - ghost war-room.svg 참조 제거
+- 확장성 개선 구현 완료 (SSOT 준수 5개):
+  - 포맷 유틸 중앙화 (`src/lib/format.ts`)
+  - TeamCard 통합 (`src/components/ui/TeamCard.tsx`)
+  - Modal 컴포넌트 (`src/components/ui/Modal.tsx`)
+  - Ended 가드 검증 완료
+  - 역할 칩 War Room 추가
 
 ## 2) 현재 단계
 
