@@ -41,7 +41,7 @@ export default function ScheduleSection({ content }: { content: string }) {
 
             {/* Content */}
             <div className="pb-4">
-              <p className={`font-dunggeunmo text-sm ${past ? 'text-card-white/50' : 'text-card-white'}`}>
+              <p className={`font-dunggeunmo text-sm leading-snug ${past ? 'text-card-white/50' : 'text-card-white'}`}>
                 {m.name}
               </p>
               <p className="font-pixel text-[8px] text-card-white/40 mt-0.5">

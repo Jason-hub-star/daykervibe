@@ -21,6 +21,8 @@ body {
   background: var(--color-dark-bg);
   color: var(--color-card-white);
   font-family: var(--font-dunggeunmo);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ── Pixel border utility ── */

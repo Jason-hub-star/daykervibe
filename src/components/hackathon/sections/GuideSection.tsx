@@ -16,9 +16,9 @@ export default function GuideSection({ content }: { content: string }) {
           <h4 className="font-pixel text-[10px] text-accent-yellow mb-3">NOTICE</h4>
           <ul className="space-y-2">
             {data.notice.map((n, i) => (
-              <li key={i} className="font-dunggeunmo text-sm text-card-white/80 flex gap-2">
-                <span className="text-accent-orange">▸</span>
-                {n}
+              <li key={i} className="font-dunggeunmo text-sm leading-snug text-card-white/80 flex gap-2">
+                <span className="shrink-0 text-accent-orange">▸</span>
+                <span>{n}</span>
               </li>
             ))}
           </ul>

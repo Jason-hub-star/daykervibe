@@ -28,7 +28,7 @@ export default function EvalSection({ content }: { content: string }) {
       )}
 
       {data.description && (
-        <p className="font-dunggeunmo text-sm text-card-white/80">{data.description}</p>
+        <p className="font-dunggeunmo text-sm leading-snug text-card-white/80">{data.description}</p>
       )}
 
       {/* Rubric Table */}
