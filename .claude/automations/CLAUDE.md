@@ -11,7 +11,7 @@ Hackerton automation prompt index for deterministic documentation and evidence m
 ## Prompt Files
 | File | Purpose | Schedule |
 |---|---|---|
-| `docs-nightly-organizer.prompt.md` | Organize daily logs and archive candidate notes. | Daily 22:00 KST |
-| `code-doc-align.prompt.md` | Check SSOT, PRD, status, and route plan drift. | Daily 03:30 KST |
-| `architecture-diagrams-sync.prompt.md` | Check architecture diagram coverage against SSOT and wireframe. | Daily 04:00 KST |
-| `automation-health-monitor.prompt.md` | Summarize automation health and lock status. | Daily 09:30 KST |
+| `docs-nightly-organizer.prompt.md` | Organize daily logs and archive candidate notes. | 평일 14:30 KST |
+| `code-doc-align.prompt.md` | Check SSOT, PRD, status, and route plan drift. | 평일 10:30 KST |
+| `architecture-diagrams-sync.prompt.md` | Check architecture diagram coverage against SSOT and wireframe. | 평일 11:00 KST |
+| `automation-health-monitor.prompt.md` | Summarize automation health and lock status. | 평일 11:30 KST |
