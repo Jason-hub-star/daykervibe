@@ -1,6 +1,6 @@
 # Cross-Check Checklist
 
-Last Updated: 2026-03-10 (KST)
+Last Updated: 2026-03-11 (KST)
 Scope: document-to-product cross-check, remaining feature decisions, missing submission assets
 
 ## Decisions Locked
@@ -51,16 +51,19 @@ Scope: document-to-product cross-check, remaining feature decisions, missing sub
 
 ## Phase D - Submission Assets Still Missing
 
-- [ ] Create deployment evidence once Vercel URL exists.
-- [ ] Add a dedicated deployment checklist/evidence doc.
+- [x] Create deployment evidence once Vercel URL exists.
+- [x] Add a dedicated deployment checklist/evidence doc.
 - [ ] Add one manual phone-pass evidence item for:
   - soft keyboard compression
   - contrast
   - touch comfort
   - Status: not completed yet because no real-device pass was run
-- [ ] Produce final Submission 1 copy asset from the current draft.
-- [ ] Prepare PDF source outline or capture list for final PDF packaging.
-- [ ] Decide whether root images `Hackathon-UI-Flow.png` and `memo.png` are submission assets or internal leftovers.
+- [x] Produce final Submission 1 copy asset from the current draft.
+- [x] Prepare PDF source outline or capture list for final PDF packaging.
+- [ ] Export final PDF deliverable from the prepared PPT/source deck.
+- [ ] Add final narration audio to the Remotion intro video and render the delivery version.
+- [ ] Capture one actual messenger preview image after share metadata propagation is confirmed.
+- [x] Decide whether root images `Hackathon-UI-Flow.png` and `memo.png` are submission assets or internal leftovers.
 
 ## Phase E - Nice To Have After Core Gaps
 
@@ -83,4 +86,4 @@ Scope: document-to-product cross-check, remaining feature decisions, missing sub
 - Submission-facing docs no longer overclaim unavailable behavior.
 - War-room supports actual workflow-card movement.
 - Privacy rules are verified with evidence.
-- Deployment, manual QA, and submission packaging assets are all present.
+- Deployment, manual QA, PDF, narration-added video, and submission packaging assets are all present.

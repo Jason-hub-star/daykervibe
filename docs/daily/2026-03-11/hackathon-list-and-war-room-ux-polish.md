@@ -14,6 +14,10 @@
 - 해커톤 상세 Teams Section에 `원정대 만들기` CTA를 추가해 `/camp` 생성 폼을 직접 열 수 있게 했다.
 - Submit Section에 파일형 제출용 `file input`을 추가하고, 선택 파일명을 pending draft로 저장하도록 보강했다.
 - 루트 메타데이터에 `openGraph`, `twitter`, `metadataBase`를 추가해 카카오톡 공유 카드에 대표 이미지가 붙도록 정리했다.
+- 제출용 자산 정리를 위해 `asset audit`, `deployment evidence`, PDF 원고 폴더, Remotion 소개영상 프로젝트를 추가했다.
+- 제출용 PPT 초안을 바로 뽑을 수 있도록 `submission-assets/pptx/` 자동 생성기를 추가하고 `.pptx` 산출물을 검증했다.
+- 제출 제목에 맞춰 소개 자산 문구를 `원정대 구성 -> 제출 준비 관리 -> 결과 확인` 중심 서사로 다시 정렬했다.
+- 결론/확장 메시지는 `자동화된 코드 리뷰 + 문서 정합성 점검`을 통한 품질 관리 관점으로 다듬었다.
 
 ## Why
 - 모집중인 해커톤이 목록 상단에 오지 않으면 참가자 탐색 효율이 떨어졌다.
@@ -69,6 +73,22 @@
 - `src/app/layout.tsx`
   - `metadataBase`, `canonical`, `openGraph`, `twitter` 메타 추가
   - 공유 대표 이미지로 `og-image-hero.webp` 연결
+- `docs/submission/asset-audit.md`
+  - 폰트/이미지/SVG 아이콘의 제출용 사용 근거 정리
+- `docs/submission/deployment-evidence.md`
+  - 배포 URL / GitHub / 핵심 라우트 접근 / 공유 메타 확인 결과 정리
+- `submission-assets/pdf/*`
+  - `outline.md`, `slide-copy.md`, `capture-list.md`, `asset-license-note.md` 생성
+- `submission-assets/video-remotion/*`
+  - 독립 Remotion 프로젝트 생성
+  - `public/stills/`에 대표 화면 캡처 복사
+  - scene/timeline/script 기반 소개영상 composition 스캐폴드 생성
+- `submission-assets/pptx/*`
+  - `pptxgenjs` 기반 독립 PPTX 생성기 추가
+  - `out/expedition-hub-submission-deck.pptx` 생성
+  - PowerPoint preview export로 커버/본문 레이아웃 확인
+  - 커버와 핵심 장표 문구를 제출 제목 방향으로 재정렬
+  - 결론/확장 장표에 자동화 기반 품질 검수 메시지 반영
 
 ## Validation
 - `npm run lint`
@@ -86,3 +106,12 @@
   - `docs/Prd.md`, `docs/status/PROJECT-STATUS.md`
 - `docs/status/INTEGRITY-REPORT.md`, `ai-context/master-plan.md`를 현재 구현 상태에 맞게 갱신했다.
 - 배포 공유 메타를 추가해 카카오톡 등 메신저에서 이미지 포함 미리보기가 가능하도록 맞췄다.
+- 제출 패키징 자산은 `자산 감사 -> PDF 원고 -> still 캡처 -> Remotion 렌더` 흐름으로 바로 이어질 수 있는 상태가 됐다.
+- 제출용 PPT는 이제 원고 수동 복붙이 아니라 스크립트로 재생성 가능한 상태가 됐다.
+- PPT와 영상 오프닝 문구는 현재 제출 제목과 직접 연결되는 방향으로 정리됐다.
+- 엔딩/결론은 자동화된 리뷰와 문서 정합성 점검을 통한 회귀 위험 축소 메시지로 정리됐다.
+
+## Current Situation / Remaining Work
+- 구현/문서/배포 증빙/제출 자산 스캐폴드는 대부분 정리된 상태다.
+- 현재 남은 핵심 작업은 `PDF 최종 export`, `영상 나레이션 추가`, `실기기 phone pass 증빙`, `메신저 공유 카드 실제 캡처`다.
+- 제출 자산 메시지는 현재 제출 제목인 `원정대 구성부터 제출 준비 관리, 결과 확인까지 이어지는 재사용형 해커톤 실행 포털`에 맞춰 정렬했다.

@@ -1,5 +1,53 @@
 # Project Status
 
+## 2026-03-11 Current Situation / Remaining Work
+
+- Current situation
+  - 제품 구현은 SSOT 기준 핵심 6개 라우트와 주요 사용자 흐름까지 정리된 상태다.
+  - 배포 URL, GitHub 링크, 자산 감사 문서, 배포 증빙 문서, PDF 원고, PPTX 자동 생성기, Remotion 영상 스캐폴드가 준비됐다.
+  - 제출 제목 기준으로 소개 자산의 핵심 메시지를 `원정대 구성 -> 제출 준비 관리 -> 결과 확인` 서사로 정렬했다.
+- Not finished yet
+  - Remotion 소개영상에는 아직 나레이션 오디오가 들어가지 않았다.
+  - PDF는 원고와 캡처 리스트까지 준비됐고, 실제 PPT/PDF 최종 export는 남아 있다.
+  - 실기기 기준 manual phone pass 증빙은 아직 없다.
+  - 카카오 공유 카드의 실제 메신저 캡처 증빙은 아직 확보하지 않았다.
+- Next required actions
+  1. PDF 최종본 export
+  2. 나레이션 생성 후 Remotion 최종 렌더
+  3. 실기기 mobile pass와 메신저 공유 카드 캡처 확보
+  4. 최종 제출 패키지 점검
+
+## 2026-03-11 Addendum - Submission Asset Audit, PDF Pack, and Remotion Scaffold
+
+- Submission docs
+  - `docs/submission/asset-audit.md` 추가
+  - `docs/submission/deployment-evidence.md` 추가
+  - 폰트/이미지/SVG 아이콘의 제출용 사용 근거와 표준 문구를 정리
+- PDF packaging
+  - `submission-assets/pdf/outline.md`, `slide-copy.md`, `capture-list.md`, `asset-license-note.md` 생성
+  - 상세 설명형 13장 구조, 배포 URL / GitHub 반복 노출, 부록 후보 자산 분류 기준 고정
+  - `submission-assets/pptx/` 독립 PPTX 생성기 추가
+  - `pptxgenjs` 기반으로 `out/expedition-hub-submission-deck.pptx` 자동 생성
+  - PowerPoint 미리보기 export 기준 13장 슬라이드와 커버/본문 레이아웃 확인
+  - 제출 제목 기준으로 `원정대 구성 -> 제출 준비 관리 -> 결과 확인` 서사가 먼저 보이도록 커버와 핵심 장표 문구 조정
+  - 결론/확장 장표에 자동화된 코드 리뷰와 문서 정합성 점검 흐름을 품질 관리 메시지로 반영
+- Remotion intro video
+  - `submission-assets/video-remotion/` 독립 프로젝트 생성
+  - `src/index.ts`, `Root.tsx`, scene/timeline/script 데이터, still/public 구조 생성
+  - `output/playwright/` 기반 핵심 still 5장을 `public/stills/`로 복사
+  - `npm install`, `npm run compositions`, `npm run render`로 기본 composition과 mp4 렌더 검증 완료
+  - 오프닝/문제 정의/결과 장면 문구를 제출 제목 기준으로 재정렬
+  - 엔딩 장면에 자동화 기반 품질 검수 메시지 반영
+- Voice plan
+  - voice cloning reference 보관용 `voice/README.md` 추가
+  - 오디오 미삽입 상태에서도 영상 뼈대가 렌더 가능하도록 구성
+- Validation:
+  - `submission-assets/pptx`: `npm install` passed
+  - `submission-assets/pptx`: `npm run build` passed
+  - `submission-assets/video-remotion`: `npm install` passed
+  - `submission-assets/video-remotion`: `npm run compositions` passed
+  - `submission-assets/video-remotion`: `npm run render` passed
+
 ## 2026-03-11 Addendum - Share Preview Metadata
 
 - Root metadata

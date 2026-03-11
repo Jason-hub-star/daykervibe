@@ -1,0 +1,21 @@
+{
+  "name": "expedition-hub-video-remotion",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts ExpeditionHubIntro out/expedition-hub-intro.mp4",
+    "compositions": "remotion compositions src/index.ts"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.434"
+  },
+  "devDependencies": {
+    "@remotion/cli": "4.0.434",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
