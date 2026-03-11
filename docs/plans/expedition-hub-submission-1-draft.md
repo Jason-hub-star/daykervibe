@@ -9,7 +9,7 @@
 - Broken demo contact links are no longer treated as public contact actions.
 - Source-incomplete hackathons now render a source-limited 8-section detail shell rather than a generic missing-content fallback.
 - Missing source-backed start dates now render as `미공개`.
-- File-style public submit requirements are note-only prep fields, and invalid URL draft values do not advance submit readiness.
+- File-style public submit requirements now use a browser file-picker draft field that stores only the selected filename, and invalid URL draft values do not advance submit readiness.
 
 ## 0. 2026-03-10 Alignment Addendum
 

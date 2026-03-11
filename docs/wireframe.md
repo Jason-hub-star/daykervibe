@@ -30,7 +30,8 @@
   - now acts as `제출 가이드 + 최소 제출 패널 + 다음 행동 연결`
   - ended hackathons switch this panel to an archive/read-only state instead of showing draft actions
   - missing source-backed start dates render as `미공개`
-  - file-style public submit requirements use note-only prep fields, not real uploads
+  - file-style public submit requirements use a browser file-picker field
+  - the browser stores only the selected filename in the public draft, not the real file binary
   - invalid URL draft values do not advance submit readiness
   - primary action routes:
     - exactly one local team for the hackathon: `/war-room/:teamId`

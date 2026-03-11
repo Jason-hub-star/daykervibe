@@ -96,30 +96,21 @@ const ARTIFACT_TYPE_CONFIG: Record<
   },
 };
 
-function isNoteOnlyFileRequirement(value: string): boolean {
+function isFileRequirement(value: string): boolean {
   const normalized = value.toLowerCase();
   return normalized.includes('zip') || normalized.includes('csv') || normalized.includes('pdf file');
 }
 
-function createNoteOnlyFileFields(baseKey: string, title: string): FieldConfig[] {
-  return [
-    {
-      key: `${baseKey}-file-name`,
-      label: `${title} 준비 파일명`,
-      inputType: 'text',
-      placeholder: '예: submission.zip',
-      helperText: '이 패널에서는 준비 메모만 저장합니다.',
-      multiline: false,
-    },
-    {
-      key: `${baseKey}-file-note`,
-      label: `${title} 파일 준비 메모`,
-      inputType: 'text',
-      placeholder: '업로드 전 체크 포인트나 파일 상태를 적어두세요.',
-      helperText: '실제 파일 관리와 최종 제출 확정은 작전실에서 이어집니다.',
-      multiline: true,
-    },
-  ];
+function createFileField(baseKey: string, title: string): FieldConfig {
+  return {
+    key: `${baseKey}-file`,
+    label: `${title} 파일`,
+    inputType: 'file',
+    stage:
+      baseKey === 'plan' ? 'plan' : baseKey === 'web' ? 'web' : baseKey === 'pdf' ? 'pdf' : undefined,
+    helperText:
+      '브라우저에서는 선택한 파일명만 초안으로 저장됩니다. 실제 파일 바이너리는 저장되지 않습니다.',
+  };
 }
 
 function buildFieldConfigs(data: SubmitData): FieldConfig[] {
@@ -127,8 +118,8 @@ function buildFieldConfigs(data: SubmitData): FieldConfig[] {
 
   if (data.submissionItems?.length) {
     for (const item of data.submissionItems) {
-      if (isNoteOnlyFileRequirement(item.format)) {
-        fields.push(...createNoteOnlyFileFields(item.key, item.title));
+      if (isFileRequirement(item.format)) {
+        fields.push(createFileField(item.key, item.title));
         continue;
       }
 
@@ -154,7 +145,7 @@ function buildFieldConfigs(data: SubmitData): FieldConfig[] {
   if (fields.length === 0 && data.allowedArtifactTypes?.length) {
     for (const artifactType of data.allowedArtifactTypes) {
       if (artifactType === 'zip' || artifactType === 'csv') {
-        fields.push(...createNoteOnlyFileFields(artifactType, artifactType.toUpperCase()));
+        fields.push(createFileField(artifactType, artifactType.toUpperCase()));
         continue;
       }
 
@@ -253,6 +244,10 @@ export default function SubmitSection({
     }));
   }
 
+  function handleFileChange(key: string, file: File | null) {
+    updateFieldValue(key, file?.name ?? '');
+  }
+
   function handleContinue() {
     savePendingSubmitDraft({
       hackathonSlug,
@@ -311,8 +306,8 @@ export default function SubmitSection({
                 작전실에서 이어집니다.
               </p>
               <p className="font-dunggeunmo text-xs text-card-white/50">
-                파일형 제출 항목은 업로드가 아니라 준비 메모로만 저장됩니다. 유효한 http/https URL만
-                제출 준비 상태와 링크 기록에 반영됩니다.
+                파일형 제출 항목은 파일 선택 UI를 제공하지만, 브라우저에서는 선택한 파일명만 초안으로
+                저장됩니다. 유효한 http/https URL만 제출 준비 상태와 링크 기록에 반영됩니다.
               </p>
             </>
           )}
@@ -348,7 +343,20 @@ export default function SubmitSection({
                     <label className="mb-1 block font-dunggeunmo text-xs text-card-white/60">
                       {field.label}
                     </label>
-                    {field.multiline ? (
+                    {field.inputType === 'file' ? (
+                      <div className="space-y-2">
+                        <input
+                          type="file"
+                          onChange={event => handleFileChange(field.key, event.target.files?.[0] ?? null)}
+                          className="w-full border-2 border-dark-border bg-dark-bg/30 px-3 py-2 font-dunggeunmo text-sm text-card-white file:mr-3 file:border-0 file:bg-accent-orange file:px-3 file:py-2 file:font-pixel file:text-[9px] file:text-dark-bg"
+                        />
+                        {fieldValues[field.key] && (
+                          <p className="font-dunggeunmo text-xs text-card-white/50">
+                            선택된 파일: {fieldValues[field.key]}
+                          </p>
+                        )}
+                      </div>
+                    ) : field.multiline ? (
                       <textarea
                         value={fieldValues[field.key] ?? ''}
                         onChange={event => updateFieldValue(field.key, event.target.value)}

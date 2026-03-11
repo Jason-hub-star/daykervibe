@@ -87,7 +87,8 @@ Source of truth for route-level execution status.
   - now uses source-limited panels for incomplete source-backed sections
   - submit section routes users into a minimal draft handoff flow instead of a self-anchor CTA
   - missing source-backed start dates now render as `미공개`
-  - file-style public submit requirements are note-only prep fields
+  - file-style public submit requirements now use a browser file-picker draft field
+  - the public route stores only the selected filename, while real file binaries stay outside browser-local draft storage
   - invalid draft URLs do not advance readiness or create artifacts during war-room import
   - ended hackathons now switch `Teams` and `Submit` into archive/read-only behavior
 - `/camp`
@@ -118,3 +119,14 @@ Source of truth for route-level execution status.
 - `/war-room/:teamId`
   - 데이터 bootstrap 예외를 `ErrorState`로 수렴
   - 워크플로/체크리스트/링크 빈 상태를 공통 `EmptyState`로 정리
+
+## 2026-03-11 Addendum - Remaining SSOT Gaps Closed
+
+- `/hackathons/:slug`
+  - SummaryBar가 `STATUS / PERIOD / TEAMS / VIEWS / PRIZE`를 모두 표시하도록 보강
+  - Teams Section에 `원정대 만들기` CTA 추가, `/camp?hackathon=:slug&compose=1`로 생성 폼을 직접 열도록 연결
+  - Submit Section이 `zip/csv` 같은 파일형 요구에 대해 실제 `file input` UI를 제공하도록 변경
+- `/camp`
+  - `compose=1` 쿼리로 진입하면 해커톤 스코프를 유지한 채 생성 폼을 자동으로 여는 딥링크 흐름 추가
+- `src/lib/submission-drafts.ts`
+  - public submit draft import가 파일 선택 draft도 notes/stage draft로 반영하도록 정렬

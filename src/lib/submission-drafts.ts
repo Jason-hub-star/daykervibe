@@ -98,6 +98,7 @@ export function applyPendingSubmitDraftToTeam(team: Team): boolean {
     const isValidUrlField = field.inputType === 'url' && isHttpUrl(value);
     const shouldPromoteStage =
       (field.inputType === 'text' && Boolean(field.stage)) ||
+      (field.inputType === 'file' && Boolean(field.stage)) ||
       (field.inputType === 'url' && Boolean(field.stage) && isValidUrlField);
 
     if (shouldPromoteStage) {

@@ -1,5 +1,21 @@
 # Project Status
 
+## 2026-03-11 Addendum - Detail Summary and Submit Flow SSOT Gap Closure
+
+- `/hackathons/:slug`
+  - 상단 SummaryBar에 `기간`, `조회수`를 추가해 SSOT 요구 항목 `상태 / 기간 / 팀 수 / 조회수 / 총상금`을 모두 노출
+  - 기존 `D-DAY` 중심 요약은 제거하고 기간 자체를 직접 보여주도록 조정
+- `Teams Section`
+  - 상세 팀 섹션 하단 CTA를 `원정대 만들기` + `CAMP에서 팀 찾기`로 분리
+  - `원정대 만들기`는 `/camp?hackathon=:slug&compose=1` 딥링크로 연결해 해커톤 스코프가 걸린 생성 폼을 바로 열도록 정렬
+- `Submit Section`
+  - `zip/csv` 등 파일형 제출 요구에 대해 실제 `file input` UI를 추가
+  - 브라우저에서는 선택한 파일명만 pending draft로 저장하고, 작전실 import 시 notes와 stage draft로 이어지도록 보강
+  - 유효한 URL 필드는 기존처럼 artifact/link 흐름을 유지
+- Validation:
+  - `npm run lint` passed
+  - `npm run build` passed
+
 ## 2026-03-11 Addendum - Camp CRUD and Common State UI Alignment
 
 - `/camp`
@@ -107,8 +123,8 @@
 - Public submit draft import is stricter:
   - text fields advance only their mapped text stage
   - URL fields advance readiness only when the value is a valid `http/https` URL
-  - file-style public submit requirements are note-only and do not create fake upload state
-- War-room import now keeps invalid URLs and note-only file prep content in notes only, not in readiness stages or artifact links.
+  - file-style public submit requirements now use a browser file-picker draft field that stores only the selected filename
+- War-room import now keeps invalid URLs in notes only, promotes text/file draft stages into readiness, and reserves artifact links for valid URLs.
 - Validation:
   - `npm run lint` passed
   - `npm run build` passed
@@ -270,7 +286,7 @@ Product: `Expedition Hub`
 - 제품 서비스명은 `Expedition Hub`
 - 공식 안내가 사용자 수기 명세, PNG, 기존 JSON보다 우선
 - 베이스캠프는 별도 라우트가 아니라 작전실 상단 상태 요약으로 처리
-- 작전실은 팀 전용 협업 공간이 아니라 제출 준비 관리 허브로 해석
+- 작전실은 팀 전용 협업 흐름과 제출 준비 관리를 함께 다루는 허브로 정리
 - 기술 스택은 `Next.js + TypeScript + Tailwind + localStorage + Vercel`
 - 추가 페이지(프로필, 설정 등) 불필요하며 기존 6개 페이지 완성도에 집중한다
 - Next.js 16 / ESLint 9 조합에 맞춰 flat config 기준으로 lint 체계를 유지한다

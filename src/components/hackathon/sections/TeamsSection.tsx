@@ -45,6 +45,7 @@ export default function TeamsSection({
   }, [hackathonSlug]);
 
   const campUrl = data.listUrl ?? `/camp?hackathon=${encodeURIComponent(hackathonSlug)}`;
+  const createTeamUrl = `${campUrl}${campUrl.includes('?') ? '&' : '?'}compose=1`;
 
   return (
     <div className="space-y-4">
@@ -65,7 +66,8 @@ export default function TeamsSection({
       )}
 
       {data.campEnabled && !isEnded && (
-        <div className="pt-2 text-center">
+        <div className="flex flex-wrap justify-center gap-2 pt-2">
+          <PixelButton href={createTeamUrl}>원정대 만들기</PixelButton>
           <PixelButton href={campUrl} variant="ghost">
             CAMP에서 팀 찾기
           </PixelButton>

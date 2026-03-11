@@ -10,6 +10,9 @@
 - `/camp` 생성 폼에서 모집 역할을 선택/추가/제거할 수 있는 UI를 넣었다.
 - `/camp` 생성/수정 폼에 `isOpen` 입력과 커스텀 팀 전용 `수정`, `모집 마감` 흐름을 추가했다.
 - 핵심 6개 라우트의 `loading / empty / error` 상태 UI 분기를 다시 맞췄다.
+- `/hackathons/:slug` SummaryBar에 `기간`, `조회수`를 추가해 SSOT 요약 항목을 모두 맞췄다.
+- 해커톤 상세 Teams Section에 `원정대 만들기` CTA를 추가해 `/camp` 생성 폼을 직접 열 수 있게 했다.
+- Submit Section에 파일형 제출용 `file input`을 추가하고, 선택 파일명을 pending draft로 저장하도록 보강했다.
 
 ## Why
 - 모집중인 해커톤이 목록 상단에 오지 않으면 참가자 탐색 효율이 떨어졌다.
@@ -50,6 +53,18 @@
 - `src/app/war-room/[teamId]/page.tsx`
   - 작전실 bootstrap 에러 처리 추가
   - 워크플로/체크리스트/링크 empty 상태를 공통 컴포넌트로 정리
+- `src/components/hackathon/SummaryBar.tsx`
+  - `D-DAY` 대신 `PERIOD`, `VIEWS`를 포함한 SSOT 기준 5개 요약 항목으로 조정
+- `src/components/hackathon/sections/TeamsSection.tsx`
+  - `원정대 만들기` CTA 추가
+  - `/camp?hackathon=:slug&compose=1` 딥링크 연결
+- `src/app/camp/page.tsx`
+  - `compose=1` 쿼리 진입 시 생성 폼 자동 오픈 처리
+- `src/components/hackathon/sections/SubmitSection.tsx`
+  - `zip/csv` 제출형에 대한 실제 `file input` UI 추가
+  - 선택한 파일명만 브라우저 draft에 저장하도록 변경
+- `src/lib/submission-drafts.ts`
+  - 파일 선택 draft도 stage draft와 notes에 반영되도록 보강
 
 ## Validation
 - `npm run lint`
@@ -61,4 +76,8 @@
 - 파생 문서에서 실제와 어긋난 항목 1건을 수정했다:
   - `docs/wireframe.md`가 삭제된 `public/design_reference/*` 자산을 계속 참조하고 있었음
   - 라이브 구현 + evidence 문서 기준으로 교체
+- 제출 draft 구현이 `file input` 기반으로 바뀐 뒤 남아 있던 파생 문서 설명도 동기화했다.
+  - `docs/schema.md`, `docs/ref/daker-handover-ui-spec.md`, `docs/status/PAGE-UPGRADE-BOARD.md`, `docs/plans/expedition-hub-submission-1-draft.md`
+- 작전실 설명 문구에서 `협업이 아닌 허브`처럼 읽히던 표현을 걷어내고, `팀 전용 협업 흐름 + 제출 준비 관리 허브` 방향으로 정리했다.
+  - `docs/Prd.md`, `docs/status/PROJECT-STATUS.md`
 - `docs/status/INTEGRITY-REPORT.md`, `ai-context/master-plan.md`를 현재 구현 상태에 맞게 갱신했다.

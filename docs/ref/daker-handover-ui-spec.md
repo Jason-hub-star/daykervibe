@@ -8,7 +8,8 @@
     - show guide copy
     - show a minimal submit draft panel
     - route the user to either scoped camp or the team war-room for authoritative submission management
-  - file-style public submit requirements are note-only preparation fields, not uploads
+  - file-style public submit requirements expose a file-picker draft field
+  - the browser stores only the selected filename in the draft, not the actual file binary
   - invalid URL draft values do not advance readiness or create artifact links
 - `Authoritative submission management`
   - remains team-local in `/war-room/:teamId`

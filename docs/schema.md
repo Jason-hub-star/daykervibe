@@ -28,7 +28,8 @@
 - `PendingSubmitDraft`
   - text fields advance readiness only when they map to a text stage and have non-empty content
   - URL fields advance readiness only when they are valid `http/https` values
-  - file-style public submit fields are note-only and do not advance readiness by themselves
+  - file-style public submit fields use a browser file picker and store only the selected filename in the draft
+  - file-style draft values may advance the mapped readiness stage, but they do not persist file binaries or create artifact links
 - `SubmissionArtifact`
   - only valid URL draft values may become team-local artifact links during war-room import
 

@@ -61,6 +61,7 @@ function CampPageContent() {
   const [customRoleInput, setCustomRoleInput] = useState('');
   const [formContact, setFormContact] = useState('');
   const filter = searchParams.get('hackathon')?.trim() || 'all';
+  const compose = searchParams.get('compose') === '1';
 
   useEffect(() => {
     let cancelled = false;
@@ -96,6 +97,22 @@ function CampPageContent() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!compose) return;
+
+    if (filter !== 'all' && !formHackathon) {
+      setFormHackathon(filter);
+    }
+
+    setShowForm(true);
+
+    const nextSearchParams = new URLSearchParams(searchParams.toString());
+    nextSearchParams.delete('compose');
+    const nextQuery = nextSearchParams.toString();
+
+    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
+  }, [compose, filter, formHackathon, pathname, router, searchParams]);
 
   const activeHackathon = hackathons.find(hackathon => hackathon.slug === filter);
   const pendingDraft = useMemo(
