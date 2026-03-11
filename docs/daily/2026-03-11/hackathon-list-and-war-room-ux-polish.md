@@ -18,6 +18,7 @@
 - 제출용 PPT 초안을 바로 뽑을 수 있도록 `submission-assets/pptx/` 자동 생성기를 추가하고 `.pptx` 산출물을 검증했다.
 - 제출 제목에 맞춰 소개 자산 문구를 `원정대 구성 -> 제출 준비 관리 -> 결과 확인` 중심 서사로 다시 정렬했다.
 - 결론/확장 메시지는 `자동화된 코드 리뷰 + 문서 정합성 점검`을 통한 품질 관리 관점으로 다듬었다.
+- 루트 `tsconfig.json`에서 `submission-assets/`를 제외해 Vercel의 Next.js 타입 검사와 제출 자산 스캐폴드가 충돌하지 않도록 분리했다.
 
 ## Why
 - 모집중인 해커톤이 목록 상단에 오지 않으면 참가자 탐색 효율이 떨어졌다.
@@ -89,10 +90,14 @@
   - PowerPoint preview export로 커버/본문 레이아웃 확인
   - 커버와 핵심 장표 문구를 제출 제목 방향으로 재정렬
   - 결론/확장 장표에 자동화 기반 품질 검수 메시지 반영
+- `tsconfig.json`
+  - 루트 Next.js 타입 검사에서 `submission-assets/`를 제외
+  - 배포 빌드가 Remotion/PPTX 보조 프로젝트 타입 의존성에 막히지 않도록 조정
 
 ## Validation
 - `npm run lint`
 - `npm run build`
+- root `npm run build` after `submission-assets/` exclude
 
 ## Self Review / Docs Consistency
 - `/camp` CRUD와 공통 상태 UI 정합성 패치 기준으로 SSOT 재대조를 수행했다.

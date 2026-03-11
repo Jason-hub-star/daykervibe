@@ -6,6 +6,7 @@
   - 제품 구현은 SSOT 기준 핵심 6개 라우트와 주요 사용자 흐름까지 정리된 상태다.
   - 배포 URL, GitHub 링크, 자산 감사 문서, 배포 증빙 문서, PDF 원고, PPTX 자동 생성기, Remotion 영상 스캐폴드가 준비됐다.
   - 제출 제목 기준으로 소개 자산의 핵심 메시지를 `원정대 구성 -> 제출 준비 관리 -> 결과 확인` 서사로 정렬했다.
+  - 루트 Next.js 빌드에서는 `submission-assets/`를 타입 검사 범위에서 제외해 배포 빌드와 제출 자산 스캐폴드를 분리했다.
 - Not finished yet
   - Remotion 소개영상에는 아직 나레이션 오디오가 들어가지 않았다.
   - PDF는 원고와 캡처 리스트까지 준비됐고, 실제 PPT/PDF 최종 export는 남아 있다.
@@ -42,6 +43,7 @@
   - voice cloning reference 보관용 `voice/README.md` 추가
   - 오디오 미삽입 상태에서도 영상 뼈대가 렌더 가능하도록 구성
 - Validation:
+  - root `npm run build` passed after excluding `submission-assets/` from the app tsconfig
   - `submission-assets/pptx`: `npm install` passed
   - `submission-assets/pptx`: `npm run build` passed
   - `submission-assets/video-remotion`: `npm install` passed
