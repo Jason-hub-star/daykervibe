@@ -287,7 +287,7 @@ function CampPageContent() {
       {pendingDraft && activeHackathon && (
         <div className="mb-6 border border-accent-orange/35 bg-accent-orange/10 px-4 py-3">
           <p className="font-pixel text-[9px] text-accent-orange">PENDING SUBMIT DRAFT</p>
-          <p className="mt-1 font-dunggeunmo text-sm text-card-white/80">
+          <p className="mt-1 font-dunggeunmo text-sm leading-snug text-card-white/80">
             {activeHackathon.title} 상세에서 저장한 제출 초안이 있습니다. 팀을 찾거나 작전실로 들어가 이어서 정리할 수 있습니다.
           </p>
         </div>

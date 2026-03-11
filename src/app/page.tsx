@@ -89,7 +89,7 @@ export default function Home() {
                 <span className="text-accent-yellow">OPERATIONS</span><br />
                 PORTAL
               </h1>
-              <p className="font-dunggeunmo text-lg text-card-white/80 mb-8 max-w-md">
+              <p className="font-dunggeunmo text-lg leading-relaxed text-card-white/80 mb-8 max-w-md">
                 바이브 코딩 스타일의 해커톤 운영 포털.
                 지금 바로 모험을 시작하세요.
               </p>
@@ -142,10 +142,10 @@ export default function Home() {
                   <div className="flex items-start justify-between mb-2">
                     <StatusBadge status={h.status} />
                   </div>
-                  <h3 className="font-dunggeunmo font-bold text-base mb-2 line-clamp-2">
+                  <h3 className="font-dunggeunmo font-bold text-base leading-snug mb-2 line-clamp-2">
                     {h.title}
                   </h3>
-                  <p className="font-dunggeunmo text-sm text-dark-bg/70 mb-3 line-clamp-2">
+                  <p className="font-dunggeunmo text-sm leading-snug text-dark-bg/70 mb-3 line-clamp-2">
                     {h.summary}
                   </p>
                   <div className="flex flex-wrap gap-1">
@@ -183,7 +183,7 @@ export default function Home() {
               >
                 <Image src={f.icon} alt={f.title} width={40} height={40} />
                 <span className="font-pixel text-[10px] text-accent-orange">{f.title}</span>
-                <span className="font-dunggeunmo text-xs text-card-white/70">{f.desc}</span>
+                <span className="font-dunggeunmo text-xs leading-snug text-card-white/70">{f.desc}</span>
               </div>
             ))}
           </div>

@@ -78,7 +78,7 @@ function CampTeamCard({
         </span>
       )}
 
-      <p className="mb-3 font-dunggeunmo text-sm text-card-white/70">{team.intro}</p>
+      <p className="mb-3 font-dunggeunmo text-sm leading-snug text-card-white/70">{team.intro}</p>
 
       {team.lookingFor.length > 0 && (
         <div className="mb-3 flex flex-wrap gap-1.5">
@@ -163,7 +163,7 @@ function DetailTeamCard({ team, isEnded }: { team: Team; isEnded: boolean }) {
           {isEnded ? 'ENDED' : team.isOpen ? 'RECRUITING' : 'CLOSED'}
         </span>
       </div>
-      <p className="mb-2 font-dunggeunmo text-xs text-dark-bg/70">{team.intro}</p>
+      <p className="mb-2 font-dunggeunmo text-xs leading-snug text-dark-bg/70">{team.intro}</p>
       <div className="mb-3 flex items-center justify-between gap-3">
         <div className="flex flex-wrap gap-1.5">
           {team.lookingFor.map(role => (

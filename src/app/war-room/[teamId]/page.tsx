@@ -543,7 +543,7 @@ export default function WarRoomPage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
             <div>
               <span className="block font-dunggeunmo text-xs text-card-white/50">원정대</span>
-              <span className="font-dunggeunmo font-bold">{currentTeam.name}</span>
+              <span className="break-words font-dunggeunmo font-bold">{currentTeam.name}</span>
             </div>
             <div>
               <span className="block font-dunggeunmo text-xs text-card-white/50">연결 해커톤</span>

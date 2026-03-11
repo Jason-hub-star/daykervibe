@@ -266,8 +266,8 @@ export default function SubmitSection({
           <h4 className="mb-3 font-pixel text-[10px] text-accent-yellow">SUBMISSION GUIDE</h4>
           <ol className="space-y-2">
             {data.guide.map((guide, index) => (
-              <li key={guide} className="flex gap-2 font-dunggeunmo text-sm text-card-white/80">
-                <span className="font-pixel text-[10px] text-accent-orange">{index + 1}.</span>
+              <li key={guide} className="flex gap-2 font-dunggeunmo text-sm leading-snug text-card-white/80">
+                <span className="shrink-0 font-pixel text-[10px] text-accent-orange">{index + 1}.</span>
                 <span>{guide}</span>
               </li>
             ))}
@@ -290,22 +290,22 @@ export default function SubmitSection({
 
           {isEnded ? (
             <>
-              <p className="font-dunggeunmo text-sm text-card-white/70">
+              <p className="font-dunggeunmo text-sm leading-snug text-card-white/70">
                 이 해커톤의 제출 기간은 종료되었습니다. 공개 상세에서는 제출 아카이브 상태만
                 확인할 수 있습니다.
               </p>
-              <p className="font-dunggeunmo text-xs text-card-white/50">
+              <p className="font-dunggeunmo text-xs leading-snug text-card-white/50">
                 종료된 해커톤에서는 새 제출 초안 저장, 작전실 진입, 캠프 기반 팀 찾기 같은 준비
                 액션을 노출하지 않습니다.
               </p>
             </>
           ) : (
             <>
-              <p className="font-dunggeunmo text-sm text-card-white/70">
+              <p className="font-dunggeunmo text-sm leading-snug text-card-white/70">
                 공개 상세에서는 최소 제출 초안만 저장하고, 실제 팀 단위 제출 관리와 링크 확정은
                 작전실에서 이어집니다.
               </p>
-              <p className="font-dunggeunmo text-xs text-card-white/50">
+              <p className="font-dunggeunmo text-xs leading-snug text-card-white/50">
                 파일형 제출 항목은 파일 선택 UI를 제공하지만, 브라우저에서는 선택한 파일명만 초안으로
                 저장됩니다. 유효한 http/https URL만 제출 준비 상태와 링크 기록에 반영됩니다.
               </p>
@@ -313,7 +313,7 @@ export default function SubmitSection({
           )}
 
           {data.sourceLimited && (
-            <p className="font-dunggeunmo text-xs text-card-white/50">
+            <p className="font-dunggeunmo text-xs leading-snug text-card-white/50">
               {isEnded
                 ? '현재는 공개 가능한 기록만 표시합니다. 공식 제출 형식 세부는 공개 소스에 남아 있지 않습니다.'
                 : '현재는 공개된 정보 범위 안에서 초안만 저장할 수 있습니다. 공식 제출 형식은 이후 공지 기준으로 보완될 수 있습니다.'}
