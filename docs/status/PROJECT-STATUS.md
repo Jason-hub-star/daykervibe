@@ -1,5 +1,40 @@
 # Project Status
 
+## 2026-04-01 Addendum - Korean README Refresh and Longform Video Pipeline
+
+- Repository README
+  - 루트 `README.md`를 한글 중심 제출형 README로 전면 재작성
+  - 심사 포인트 대응, 검수 동선, 화면 미리보기, 제출 자산 링크를 첫 화면에서 바로 보이게 정리
+  - 롱폼 제출 영상 가이드와 씬별 영상 플랜 문서로 바로 이어지는 링크 추가
+- Remotion longform video
+  - `submission-assets/video-remotion/`를 소개 영상 스캐폴드에서 제출용 롱폼 영상 프로젝트로 확장
+  - 장면 대본을 11개 씬 구조로 재작성하고, 각 씬에 심사 포인트와 evidence 문구를 반영
+  - 선택적 narrated render를 지원하도록 `withAudio` prop과 scene별 WAV 로딩 추가
+  - 하단 중앙 자막 세이프존과 씬별 사진 계획을 반영
+  - narration 길이에 맞춰 scene duration이 자동 확장되도록 정렬
+- Narration automation
+  - macOS `say` + `ffmpeg` 기반 `npm run tts:mac` 스크립트 추가
+  - 기본 한국어 음성만으로 scene별 narration WAV를 자동 생성 가능
+  - `audio-durations.json`을 함께 갱신해 narration과 타임라인 불일치를 줄임
+  - MimikaStudio 연동용 `npm run voice:sync`, `npm run tts:mimika` 스크립트 추가
+  - 주인님 레퍼런스 음성을 `submission-assets/video-remotion/voice/reference.wav`로 정규화하고 `jisun-daykervibe` voice clone으로 동기화
+  - `npm run srt:ko`로 YouTube 업로드용 `submission-assets/video-remotion/public/audio/subtitles-ko.srt` 생성
+  - 문장 단위 합성 + `0.42초` 무음 삽입으로 `...입니다.` 다음 호흡이 자연스럽게 들리도록 조정
+  - `submission-assets/video-remotion/src/data/audio-timings.json`에 문장별 타이밍을 저장해 SRT도 같은 호흡을 따르도록 맞춤
+- Submission operations
+  - `docs/submission/youtube-longform-production.md` 추가
+  - `docs/submission/video-scene-plan.md` 추가
+  - `/Users/family/jason/vibehub-media`의 `raw capture -> auto analysis -> finishing -> private upload` 개념을 현재 제출 영상 제작 흐름에 맞게 재해석
+- Validation:
+  - `submission-assets/video-remotion`: `npm install`
+  - `submission-assets/video-remotion`: `npm run compositions`
+  - `submission-assets/video-remotion`: `npm run tts:mac`
+  - `submission-assets/video-remotion`: `npm run voice:sync -- '/Users/family/Downloads/김지선 내레이션 노말.mp3'`
+  - `submission-assets/video-remotion`: `npm run tts:mimika`
+  - `submission-assets/video-remotion`: `npm run srt:ko`
+  - `submission-assets/video-remotion`: `npm run render:with-audio`
+  - output: `submission-assets/video-remotion/out/expedition-hub-longform-with-audio.mp4` (`212.33s`, `33.6 MB`)
+
 ## 2026-03-11 Current Situation / Remaining Work
 
 - Current situation

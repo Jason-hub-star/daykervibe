@@ -4,7 +4,12 @@
   "version": "0.1.0",
   "scripts": {
     "studio": "remotion studio src/index.ts",
-    "render": "remotion render src/index.ts ExpeditionHubIntro out/expedition-hub-intro.mp4",
+    "render": "remotion render src/index.ts ExpeditionHubLongform out/expedition-hub-longform.mp4",
+    "render:with-audio": "remotion render src/index.ts ExpeditionHubLongform out/expedition-hub-longform-with-audio.mp4 --props='{\"withAudio\":true}'",
+    "tts:mac": "node scripts/generate-narration-macos.mjs",
+    "voice:sync": "node scripts/sync-reference-voice.mjs",
+    "tts:mimika": "node scripts/generate-narration-mimika.mjs",
+    "srt:ko": "node scripts/generate-srt.mjs",
     "compositions": "remotion compositions src/index.ts"
   },
   "dependencies": {

@@ -1,0 +1,194 @@
+{
+  "opening": {
+    "totalSeconds": 15.2,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "이번 프로젝트는 daker-handover-2026-03 해커톤의 SSOT 문서를 기준으로, 해커톤 참가자가 실제로 겪는 탐색, 팀 구성, 제출 준비, 결과 이해의 흐름을 하나의 서비스 안에 다시 엮은 Expedition Hub입니다.",
+        "start": 0,
+        "end": 15.2,
+        "seconds": 15.2
+      }
+    ]
+  },
+  "problem": {
+    "totalSeconds": 19,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "기존의 해커톤 경험은 대회 정보 확인과 팀 구성이 분리되고, 제출 준비는 또 다른 도구에 흩어집니다.",
+        "start": 0,
+        "end": 7.76,
+        "seconds": 7.76
+      },
+      {
+        "text": "그래서 참가자는 지금 무엇을 해야 하는지 놓치기 쉽고, 심사자도 공개 URL만으로는 실제 서비스 가치와 완성도를 빠르게 파악하기 어렵습니다.",
+        "start": 8.18,
+        "end": 19,
+        "seconds": 10.4
+      }
+    ]
+  },
+  "strategy": {
+    "totalSeconds": 17.8,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "그래서 우리는 구현 전에 SSOT, PRD, Schema, Wireframe, Architecture 문서를 먼저 잠갔습니다.",
+        "start": 0,
+        "end": 7.68,
+        "seconds": 7.68
+      },
+      {
+        "text": "기본 구현, 확장 아이디어, 완성도, 문서와 설명이라는 심사 기준에 맞춰 어떤 화면을 반드시 보여줘야 하는지부터 설계했습니다.",
+        "start": 8.1,
+        "end": 17.8,
+        "seconds": 9.28
+      }
+    ]
+  },
+  "discover": {
+    "totalSeconds": 16.6,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "첫 진입점에서는 해커톤 보러가기, 팀 찾기, 랭킹 보기 세 갈래를 분명하게 제공합니다.",
+        "start": 0,
+        "end": 7.04,
+        "seconds": 7.04
+      },
+      {
+        "text": "목록 페이지에서는 상태와 태그 중심 탐색을 통해 참가자가 어떤 해커톤에 먼저 집중해야 하는지 빠르게 판단할 수 있습니다.",
+        "start": 7.46,
+        "end": 16.6,
+        "seconds": 8.72
+      }
+    ]
+  },
+  "detail": {
+    "totalSeconds": 18.6,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "핵심 페이지인 해커톤 상세에서는 사용자가 필요한 정보를 여기저기 찾지 않도록 8개 필수 섹션을 고정했습니다.",
+        "start": 0,
+        "end": 8.32,
+        "seconds": 8.32
+      },
+      {
+        "text": "규칙과 일정, 상금뿐 아니라 팀 구성, 제출 가이드, 리더보드까지 한 화면 문맥 안에서 이어지기 때문에 해커톤 이해 비용이 크게 줄어듭니다.",
+        "start": 8.74,
+        "end": 18.6,
+        "seconds": 9.44
+      }
+    ]
+  },
+  "camp": {
+    "totalSeconds": 14.68,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "Camp는 단순한 게시판이 아니라 원정대 구성을 실제로 시작하는 허브입니다.",
+        "start": 0,
+        "end": 5.68,
+        "seconds": 5.68
+      },
+      {
+        "text": "참가자는 팀을 새로 만들고, 모집중 여부와 역할을 정리하고, 특정 해커톤에 묶인 팀만 골라서 탐색할 수 있습니다.",
+        "start": 6.1,
+        "end": 14.68,
+        "seconds": 8.16
+      }
+    ]
+  },
+  "war-room": {
+    "totalSeconds": 18.44,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "프로젝트의 가장 큰 확장 포인트는 War Room입니다.",
+        "start": 0,
+        "end": 3.76,
+        "seconds": 3.76
+      },
+      {
+        "text": "여기서는 현재 제출 단계와 다음 액션을 바로 확인할 수 있고, 카드 보드와 체크리스트, 메모, 링크 관리가 모두 localStorage 기반으로 이어져서 팀이 지금 어디까지 왔는지 한 눈에 파악할 수 있습니다.",
+        "start": 4.18,
+        "end": 18.44,
+        "seconds": 13.84
+      }
+    ]
+  },
+  "submit-flow": {
+    "totalSeconds": 20.92,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "제출 흐름에서는 공개 상세 페이지에서 최소 draft만 저장하고, 실제 팀 단위 제출 준비 권한은 War Room으로 이어지도록 나눴습니다.",
+        "start": 0,
+        "end": 9.36,
+        "seconds": 9.36
+      },
+      {
+        "text": "이 구조 덕분에 심사자는 공개 페이지에서 제출 구조를 이해할 수 있고, 팀은 private한 실행 상태를 다른 팀에게 노출하지 않은 채 준비를 계속할 수 있습니다.",
+        "start": 9.78,
+        "end": 20.92,
+        "seconds": 10.72
+      }
+    ]
+  },
+  "reviewer-flow": {
+    "totalSeconds": 18.6,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "Expedition Hub는 참가자 경험뿐 아니라 심사자 동선도 함께 설계했습니다.",
+        "start": 0,
+        "end": 5.76,
+        "seconds": 5.76
+      },
+      {
+        "text": "공개 라우트만 따라가도 해커톤 탐색, 상세 이해, 팀 구성, 제출 구조, 랭킹 확인까지 확인할 수 있어서 검수 시간이 짧고 설명 부담도 줄어듭니다.",
+        "start": 6.18,
+        "end": 18.6,
+        "seconds": 12
+      }
+    ]
+  },
+  "proof": {
+    "totalSeconds": 19.64,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "이번 제출에서는 코드만 있는 저장소가 아니라, 심사 증빙까지 한 번에 보이도록 구성했습니다.",
+        "start": 0,
+        "end": 6.4,
+        "seconds": 6.4
+      },
+      {
+        "text": "README, SSOT 문서, 배포 증빙, PDF 원고, PPTX 자동 생성기, 그리고 이 Remotion 기반 제출 영상 자산까지 모두 같은 레포 안에서 재현 가능합니다.",
+        "start": 6.82,
+        "end": 19.64,
+        "seconds": 12.4
+      }
+    ]
+  },
+  "closing": {
+    "totalSeconds": 19.48,
+    "pauseSeconds": 0.42,
+    "segments": [
+      {
+        "text": "결국 Expedition Hub의 가치는 정보를 나열하는 것이 아니라, 원정대 실행을 끝까지 도와주는 데 있습니다.",
+        "start": 0,
+        "end": 7.36,
+        "seconds": 7.36
+      },
+      {
+        "text": "배포 URL과 GitHub 저장소, 그리고 제출용 문서와 영상까지 함께 보시면, 이 프로젝트가 왜 재사용 가능한 해커톤 운영 포털인지 바로 확인하실 수 있습니다.",
+        "start": 7.78,
+        "end": 19.48,
+        "seconds": 11.28
+      }
+    ]
+  }
+}

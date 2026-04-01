@@ -4,3 +4,4 @@ public/audio/*.wav
 public/audio/*.mp3
 voice/*.wav
 voice/*.mp3
+voice/*.json

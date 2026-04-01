@@ -1,17 +1,17 @@
 import {Composition} from 'remotion';
-import {ExpeditionHubIntro} from './compositions/ExpeditionHubIntro';
-import {introTimeline} from './data/timeline';
+import {ExpeditionHubLongform} from './compositions/ExpeditionHubIntro';
+import {longformTimeline} from './data/timeline';
 
 export const Root = () => {
   return (
     <Composition
-      id="ExpeditionHubIntro"
-      component={ExpeditionHubIntro}
-      durationInFrames={introTimeline.totalFrames}
+      id="ExpeditionHubLongform"
+      component={ExpeditionHubLongform}
+      durationInFrames={longformTimeline.totalFrames}
       fps={30}
       width={1920}
       height={1080}
-      defaultProps={{timeline: introTimeline}}
+      defaultProps={{timeline: longformTimeline, withAudio: false}}
     />
   );
 };

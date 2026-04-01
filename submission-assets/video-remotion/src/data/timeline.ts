@@ -1,34 +1,56 @@
-import {introScriptKo} from './script.ko';
+import audioDurationsJson from './audio-durations.json';
+import {longformScriptKo} from './script.ko';
 
-export interface IntroSceneTimeline {
+export interface LongformSceneTimeline {
   id: string;
   durationInFrames: number;
   still: string;
 }
 
-export interface IntroTimeline {
-  scenes: IntroSceneTimeline[];
+export interface LongformTimeline {
+  scenes: LongformSceneTimeline[];
   totalFrames: number;
 }
 
-const scenes: IntroSceneTimeline[] = [
-  {id: 'opening', durationInFrames: 270, still: 'home-1280x800.png'},
-  {id: 'problem', durationInFrames: 240, still: 'home-1280x800.png'},
-  {id: 'discover', durationInFrames: 300, still: 'detail-1280x800.png'},
-  {id: 'detail', durationInFrames: 330, still: 'detail-1280x800.png'},
-  {id: 'camp', durationInFrames: 330, still: 'camp-form-1280x800.png'},
-  {id: 'war-room', durationInFrames: 390, still: 'war-room-drag-desktop-1280.png'},
-  {id: 'result', durationInFrames: 270, still: 'rankings-1280x800.png'},
-  {id: 'ending', durationInFrames: 240, still: 'home-1280x800.png'},
-];
+const FPS = 30;
+const AUDIO_PADDING_SECONDS = 1.2;
+
+const audioDurations = audioDurationsJson as Record<string, number>;
+
+const sceneBlueprints = [
+  {id: 'opening', still: 'home-1280x800.png', minimumSeconds: 12},
+  {id: 'problem', still: 'home-1280x800.png', minimumSeconds: 12},
+  {id: 'strategy', still: 'detail-1280x800.png', minimumSeconds: 11},
+  {id: 'discover', still: 'home-1280x800.png', minimumSeconds: 12},
+  {id: 'detail', still: 'detail-1280x800.png', minimumSeconds: 13},
+  {id: 'camp', still: 'camp-form-1280x800.png', minimumSeconds: 13},
+  {id: 'war-room', still: 'war-room-drag-desktop-1280.png', minimumSeconds: 15},
+  {id: 'submit-flow', still: 'war-room-drag-desktop-1280.png', minimumSeconds: 14},
+  {id: 'reviewer-flow', still: 'rankings-1280x800.png', minimumSeconds: 11},
+  {id: 'proof', still: 'detail-1280x800.png', minimumSeconds: 13},
+  {id: 'closing', still: 'home-1280x800.png', minimumSeconds: 11},
+] as const;
+
+const scenes: LongformSceneTimeline[] = sceneBlueprints.map((scene) => {
+  const audioDurationSeconds = audioDurations[scene.id];
+  const resolvedSeconds = audioDurationSeconds
+    ? Math.max(scene.minimumSeconds, audioDurationSeconds + AUDIO_PADDING_SECONDS)
+    : scene.minimumSeconds;
+
+  return {
+    id: scene.id,
+    still: scene.still,
+    durationInFrames: Math.ceil(resolvedSeconds * FPS),
+  };
+});
 
 const totalFrames = scenes.reduce((sum, scene) => sum + scene.durationInFrames, 0);
 
-if (scenes.length !== introScriptKo.length) {
+if (scenes.length !== longformScriptKo.length) {
   throw new Error('Timeline and script scene count must match.');
 }
 
-export const introTimeline: IntroTimeline = {
+export const longformTimeline: LongformTimeline = {
   scenes,
   totalFrames,
 };
