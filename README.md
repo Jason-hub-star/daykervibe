@@ -12,7 +12,7 @@
     ·
     <a href="docs/submission/deployment-evidence.md">배포 증빙</a>
     ·
-    <a href="docs/submission/youtube-longform-production.md">제출 영상 가이드</a>
+    <a href="docs/submission/youtube-longform-production.md">보조 영상 가이드</a>
     ·
     <a href="docs/submission/video-scene-plan.md">씬별 영상 플랜</a>
   </p>
@@ -34,9 +34,9 @@
 | 집중 대회 | `daker-handover-2026-03` |
 | 구현 라우트 | `/`, `/hackathons`, `/hackathons/:slug`, `/camp`, `/rankings`, `/war-room/:teamId` |
 | 저장 전략 | `localStorage` 우선, 외부 키 없는 검수 가능 상태 유지 |
-| 제출 포인트 | 배포 URL, GitHub 저장소, PDF 자산, Remotion 기반 롱폼 영상 자산 |
+| 제출 포인트 | 배포 URL, GitHub 저장소, PDF 자산, 보조 설명용 롱폼 영상 자산 |
 
-> 이 저장소는 단순한 웹 구현 레포가 아니라, 문서와 화면과 제출 자산을 한 흐름으로 보여주는 심사 증빙 패키지입니다.
+> 이 저장소는 단순한 웹 구현 레포가 아니라, 문서와 화면과 공식 제출물, 그리고 보조 설명 자산을 한 흐름으로 보여주는 심사 증빙 패키지입니다.
 
 ## 왜 만들었나
 
@@ -146,13 +146,15 @@ flowchart LR
 - [docs/submission/youtube-longform-production.md](docs/submission/youtube-longform-production.md)
 - [docs/submission/video-scene-plan.md](docs/submission/video-scene-plan.md)
 
-## 롱폼 제출 영상
+## 보조 설명 영상 자산
 
-이번 저장소에는 해커톤 제출용 유튜브 롱폼 영상을 위한 Remotion 스캐폴드도 함께 포함되어 있습니다.
+이번 저장소에는 프로젝트 설명과 심사 보조를 위한 유튜브 롱폼 영상용 Remotion 스캐폴드도 함께 포함되어 있습니다.
 
-- 목적: 프로젝트 홍보용이면서도 심사자가 구조를 빠르게 이해할 수 있는 제출 영상
+SSOT 기준 공식 제출물은 기획서, 최종 웹 페이지, 솔루션 설명 자료(PDF)이며, 아래 영상 자산은 제품 구조와 구현 흐름을 빠르게 전달하기 위한 보조 자료입니다.
+
+- 목적: 프로젝트 홍보와 심사 보조를 위해 구조를 빠르게 전달하는 설명 영상
 - 구성: 한국어 장면 스크립트, still 기반 씬 구성, macOS 한국어 TTS 자동 생성, narrated render
-- 참고 구조: `vibehub-media`의 `raw -> analysis -> finishing -> private upload` 흐름을 제출 자산 제작 파이프라인으로 재해석
+- 참고 구조: `vibehub-media`의 `raw -> analysis -> finishing -> private upload` 흐름을 보조 설명 자산 제작 파이프라인으로 재해석
 
 빠른 시작:
 
